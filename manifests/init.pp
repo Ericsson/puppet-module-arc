@@ -14,7 +14,6 @@ class arc (
   # <define os default values>
   # Set $os_defaults_missing to true for unspecified osfamilies
 
-  $os_selector = "${::operatingsystem}-${::operatingsystemrelease}"
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     /^RedHat-5/: {
       $package_name_default       = 'tcl-devel.i386'
@@ -68,21 +67,18 @@ class arc (
     $create_rndrelease_real = $create_rndrelease
   } else {
     $create_rndrelease_real = str2bool($create_rndrelease)
-    }
   }
 
   if type($create_symlink) == 'boolean' {
     $create_symlink_real = $create_symlink
   } else {
     $create_symlink_real = str2bool($create_symlink)
-    }
   }
 
   if type($install_package) == 'boolean' {
     $install_package_real = $install_package
   } else {
     $install_package_real = str2bool($install_package)
-    }
   }
 
   $package_name_real = $package_name ? {
