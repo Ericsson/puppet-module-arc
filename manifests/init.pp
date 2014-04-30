@@ -6,7 +6,9 @@ class arc (
   $create_rndrelease  = true,
   $create_symlink     = true,
   $install_package    = true,
+  $package_adminfile  = undef,
   $package_name       = 'USE_DEFAULTS',
+  $package_source     = undef,
   $rndrelease_version = 'USE_DEFAULTS',
   $symlink_target     = 'USE_DEFAULTS',
 ) {
@@ -81,10 +83,14 @@ class arc (
     $install_package_real = str2bool($install_package)
   }
 
+  $package_adminfile_real = $package_adminfile
+
   $package_name_real = $package_name ? {
     'USE_DEFAULTS' => $package_name_default,
     default        => $package_name
   }
+
+  $package_source_real = $package_source
 
   $rndrelease_version_real = $rndrelease_version ? {
     'USE_DEFAULTS' => $rndrelease_version_default,
@@ -105,8 +111,16 @@ class arc (
   validate_bool($create_symlink_real)
   validate_bool($install_package_real)
 
+  if $package_adminfile_real != undef {
+    validate_string($package_adminfile_real)
+  }
+
   if $package_name_real != undef {
     validate_string($package_name_real)
+  }
+
+  if $package_source_real != undef {
+    validate_string($package_source_real)
   }
 
   validate_string($rndrelease_version_real)
@@ -139,8 +153,10 @@ class arc (
 
   if $install_package_real == true {
     package { 'arc_package' :
-      ensure => present,
-      name   => $package_name_real,
+      ensure    => present,
+      name      => $package_name_real,
+      adminfile => $package_adminfile_real,
+      source    => $package_source_real,
     }
   }
 

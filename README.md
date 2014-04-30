@@ -40,11 +40,25 @@ Boolean to trigger package installation for tcl-devel.
 - *Default*: true
 
 
+package_adminfile
+-----------------
+Solaris specific: string with adminfile.
+
+- *Default*: undef
+
+
 package_name
 ============
 String with package name of tcl-devel.
 
 - *Default*: 'USE_DEFAULTS', based on OS platform
+
+
+package_source
+--------------
+Solaris specific: string with package source.
+
+- *Default*: undef
 
 
 rndrelease_version
