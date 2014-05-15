@@ -28,12 +28,20 @@ class arc (
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^SLED-10|SLES-10/: {
-      $package_name_default       = undef
+      if $::architecture == 'x86_64' {
+        $package_name_default     = 'tcl-32bit'
+      } else {
+        $package_name_default     = 'tcl'
+      }
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^SLED-11|SLES-11/: {
-      $package_name_default       = 'tcl-devel'
+      if $::architecture == 'x86_64' {
+        $package_name_default     = 'tcl-32bit'
+      } else {
+        $package_name_default     = 'tcl'
+      }
       $rndrelease_version_default = 'LMWP 3.1'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
