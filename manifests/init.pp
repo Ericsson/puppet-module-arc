@@ -151,7 +151,7 @@ class arc (
     }
   }
 
-  if $install_package_real == true {
+  if $install_package_real == true and $package_name_real != undef {
     package { 'arc_package' :
       ensure    => present,
       name      => $package_name_real,
