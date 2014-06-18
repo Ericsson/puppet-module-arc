@@ -54,6 +54,13 @@ String with package name of tcl-devel.
 - *Default*: 'USE_DEFAULTS', based on OS platform
 
 
+package_provider
+----------------
+Solaris specific: string with package provider.
+
+- *Default*: undef
+
+
 package_source
 --------------
 Solaris specific: string with package source.
