@@ -87,9 +87,8 @@ describe 'arc' do
 
         # package { 'arc_package': }
         it {
-          should contain_package('arc_package').with({
-            'ensure'    => 'present',
-            'name'      => v[:package_name_default],
+          should contain_package(v[:package_name_default]).with({
+            'ensure' => 'present',
           })
         }
       end
@@ -112,6 +111,8 @@ describe 'arc' do
       }
     end
 
+    it { should compile.with_all_deps }
+
     # file { 'arc_rndrelease' :}
     it {
       should contain_file('arc_rndrelease').with({
@@ -133,9 +134,8 @@ describe 'arc' do
 
     # package { 'arc_package': }
     it {
-      should contain_package('arc_package').with({
+      should contain_package('arc_package_name').with({
         'ensure'    => 'present',
-        'name'      => 'arc_package_name',
         'adminfile' => '/sw/Solaris/Sparc/noask',
         'provider'  => 'sun',
         'source'    => '/sw/Solaris/Sparc/arc',
