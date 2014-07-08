@@ -182,7 +182,6 @@ class arc (
   if $install_package_real == true and $package_name_real != undef {
     package { $package_name_real:
       ensure => present,
-      alias  => 'arc_package',
     }
   }
 

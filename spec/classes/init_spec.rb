@@ -89,7 +89,6 @@ describe 'arc' do
         it {
           should contain_package(v[:package_name_default]).with({
             'ensure' => 'present',
-            'alias'  => 'arc_package',
           })
         }
       end
@@ -111,6 +110,8 @@ describe 'arc' do
         :symlink_target    => '/usr/lib/libdummy2.4.2.so',
       }
     end
+
+    it { should compile.with_all_deps }
 
     # file { 'arc_rndrelease' :}
     it {
@@ -135,7 +136,6 @@ describe 'arc' do
     it {
       should contain_package('arc_package_name').with({
         'ensure'    => 'present',
-        'alias'     => 'arc_package',
         'adminfile' => '/sw/Solaris/Sparc/noask',
         'provider'  => 'sun',
         'source'    => '/sw/Solaris/Sparc/arc',
