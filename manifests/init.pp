@@ -7,7 +7,7 @@ class arc (
   $create_symlink     = true,
   $install_package    = true,
   $package_adminfile  = undef,
-  $package_name       = 'USE_DEFAULTS',
+  $packages           = 'USE_DEFAULTS',
   $package_provider   = undef,
   $package_source     = undef,
   $rndrelease_version = 'USE_DEFAULTS',
@@ -19,35 +19,35 @@ class arc (
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     /^RedHat-5/: {
-      $package_name_default       = [ 'tcl-devel.i386', 'libXmu.i386' ]
+      $packages_default           = [ 'tcl-devel.i386', 'libXmu.i386' ]
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^RedHat-6/: {
-      $package_name_default       = [ 'tcl-devel.i686', 'libXmu.i686' ]
+      $packages_default           = [ 'tcl-devel.i686', 'libXmu.i686' ]
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^SLED-10|SLES-10/: {
       if $::architecture == 'x86_64' {
-        $package_name_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
+        $packages_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
       } else {
-        $package_name_default     = [ 'tcl', 'xorg-x11-libXmu' ]
+        $packages_default     = [ 'tcl', 'xorg-x11-libXmu' ]
       }
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^SLED-11|SLES-11/: {
       if $::architecture == 'x86_64' {
-        $package_name_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
+        $packages_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
       } else {
-        $package_name_default     = [ 'tcl', 'xorg-x11-libXmu' ]
+        $packages_default     = [ 'tcl', 'xorg-x11-libXmu' ]
       }
       $rndrelease_version_default = 'LMWP 3.1'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^Solaris/: {
-      $package_name_default       = undef
+      $packages_default           = undef
       $rndrelease_version_default = "UMWP 3.3 Solaris ${::operatingsystemrelease} SPARC"
       $symlink_target_default     = undef
     }
@@ -61,7 +61,7 @@ class arc (
   # <USE_DEFAULTS vs OS defaults>
   # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
   if (
-    ($package_name       == 'USE_DEFAULTS') or
+    ($packages           == 'USE_DEFAULTS') or
     ($rndrelease_version == 'USE_DEFAULTS') or
     ($symlink_target     == 'USE_DEFAULTS')
   ) and $os_defaults_missing == true {
@@ -94,9 +94,9 @@ class arc (
 
   $package_adminfile_real = $package_adminfile
 
-  $package_name_real = $package_name ? {
-    'USE_DEFAULTS' => $package_name_default,
-    default        => $package_name
+  $packages_real = $packages ? {
+    'USE_DEFAULTS' => $packages_default,
+    default        => $packages
   }
 
   $package_provider_real = $package_provider
@@ -125,8 +125,8 @@ class arc (
     validate_string($package_adminfile_real)
   }
 
-  if $package_name_real != undef {
-    validate_array($package_name_real)
+  if $packages_real != undef {
+    validate_array($packages_real)
   }
 
   if $package_source_real != undef {
@@ -179,8 +179,8 @@ class arc (
     }
   }
 
-  if $install_package_real == true and $package_name_real != undef {
-    package { $package_name_real:
+  if $install_package_real == true and $packages_real != undef {
+    package { $packages_real:
       ensure => present,
     }
   }

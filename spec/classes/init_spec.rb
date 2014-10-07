@@ -2,7 +2,7 @@ require 'spec_helper'
 describe 'arc' do
 
   # Solaris is intentionaly excluded.
-  # It will not manage package { 'arc_package': } with defaults settings only.
+  # It will not manage package { '$packages_real': } with defaults settings only.
   platforms = {
     'RedHat-5 x86_64' =>
       { :operatingsystem            => 'RedHat',
@@ -85,7 +85,7 @@ describe 'arc' do
           })
         }
 
-        # package { 'packages_real': }
+        # package { '$packages_real': }
         v[:package_name_default].each do |package|
           it {
             should contain_package(package).with({
@@ -106,7 +106,7 @@ describe 'arc' do
       }
     end
     let :params do
-      { :package_name      => [ 'tcl-devel', 'libXmu' ],
+      { :packages          => [ 'tcl-devel-solaris', 'libXmu-solaris' ],
         :package_adminfile => '/sw/Solaris/Sparc/noask',
         :package_provider  => 'sun',
         :package_source    => '/sw/Solaris/Sparc/arc',
@@ -135,8 +135,8 @@ describe 'arc' do
       })
     }
 
-    # package { 'arc_package': }
-    [ 'tcl-devel', 'libXmu' ].each do |package|
+    # package { '$packages_real': }
+    [ 'tcl-devel-solaris', 'libXmu-solaris' ].each do |package|
       it {
         should contain_package(package).with({
           'ensure'    => 'present',

@@ -35,7 +35,7 @@ Boolean to trigger creation of libtcl symlink.
 
 install_package
 ===============
-Boolean to trigger package installation for tcl-devel.
+Boolean to trigger installation of packages.
 
 - *Default*: true
 
@@ -47,9 +47,9 @@ Solaris specific: string with adminfile.
 - *Default*: undef
 
 
-package_name
+packages
 ============
-String with package name of tcl-devel.
+Array with package names to be installed.
 
 - *Default*: 'USE_DEFAULTS', based on OS platform
 
