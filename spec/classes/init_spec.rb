@@ -8,7 +8,7 @@ describe 'arc' do
       { :operatingsystem            => 'RedHat',
         :operatingsystemrelease     => '5',
         :architecture               => 'x86_64',
-        :package_name_default       => 'tcl-devel.i386',
+        :package_name_default       => [ 'tcl-devel.i386', 'libXmu.i386' ],
         :rndrelease_version_default => 'LMWP 2.3',
         :symlink_target_default     => '/usr/lib/libtcl8.4.so',
       },
@@ -16,7 +16,7 @@ describe 'arc' do
       { :operatingsystem            => 'RedHat',
         :operatingsystemrelease     => '6',
         :architecture               => 'x86_64',
-        :package_name_default       => 'tcl-devel.i686',
+        :package_name_default       => [ 'tcl-devel.i686', 'libXmu.i686' ],
         :rndrelease_version_default => 'LMWP 2.3',
         :symlink_target_default     => '/usr/lib/libtcl8.5.so',
       },
@@ -24,7 +24,7 @@ describe 'arc' do
       { :operatingsystem            => 'SLED',
         :operatingsystemrelease     => '10',
         :architecture               => 'x86_64',
-        :package_name_default       => 'tcl-32bit',
+        :package_name_default       => [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ],
         :rndrelease_version_default => 'LMWP 2.3',
         :symlink_target_default     => '/usr/lib/libtcl8.4.so',
       },
@@ -32,7 +32,7 @@ describe 'arc' do
       { :operatingsystem            => 'SLED',
         :operatingsystemrelease     => '11',
         :architecture               => 'i386',
-        :package_name_default       => 'tcl',
+        :package_name_default       => [ 'tcl', 'xorg-x11-libXmu' ],
         :rndrelease_version_default => 'LMWP 3.1',
         :symlink_target_default     => '/usr/lib/libtcl8.5.so',
       },
@@ -40,7 +40,7 @@ describe 'arc' do
       { :operatingsystem            => 'SLES',
         :operatingsystemrelease     => '10',
         :architecture               => 'i386',
-        :package_name_default       => 'tcl',
+        :package_name_default       => [ 'tcl', 'xorg-x11-libXmu' ],
         :rndrelease_version_default => 'LMWP 2.3',
         :symlink_target_default     => '/usr/lib/libtcl8.4.so',
       },
@@ -48,7 +48,7 @@ describe 'arc' do
       { :operatingsystem            => 'SLES',
         :operatingsystemrelease     => '11',
         :architecture               => 'x86_64',
-        :package_name_default       => 'tcl-32bit',
+        :package_name_default       => [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ],
         :rndrelease_version_default => 'LMWP 3.1',
         :symlink_target_default     => '/usr/lib/libtcl8.5.so',
       },
@@ -85,12 +85,15 @@ describe 'arc' do
           })
         }
 
-        # package { 'arc_package': }
-        it {
-          should contain_package(v[:package_name_default]).with({
-            'ensure' => 'present',
-          })
-        }
+        # package { 'packages_real': }
+        v[:package_name_default].each do |package|
+          it {
+            should contain_package(package).with({
+              'ensure' => 'present',
+            })
+          }
+        end
+
       end
     end
   end
@@ -103,7 +106,7 @@ describe 'arc' do
       }
     end
     let :params do
-      { :package_name      => 'arc_package_name',
+      { :package_name      => [ 'tcl-devel', 'libXmu' ],
         :package_adminfile => '/sw/Solaris/Sparc/noask',
         :package_provider  => 'sun',
         :package_source    => '/sw/Solaris/Sparc/arc',
@@ -133,14 +136,16 @@ describe 'arc' do
     }
 
     # package { 'arc_package': }
-    it {
-      should contain_package('arc_package_name').with({
-        'ensure'    => 'present',
-        'adminfile' => '/sw/Solaris/Sparc/noask',
-        'provider'  => 'sun',
-        'source'    => '/sw/Solaris/Sparc/arc',
-      })
-    }
+    [ 'tcl-devel', 'libXmu' ].each do |package|
+      it {
+        should contain_package(package).with({
+          'ensure'    => 'present',
+          'adminfile' => '/sw/Solaris/Sparc/noask',
+          'provider'  => 'sun',
+          'source'    => '/sw/Solaris/Sparc/arc',
+        })
+      }
+    end
 
   end
 end

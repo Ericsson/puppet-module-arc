@@ -19,29 +19,29 @@ class arc (
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     /^RedHat-5/: {
-      $package_name_default       = 'tcl-devel.i386'
+      $package_name_default       = [ 'tcl-devel.i386', 'libXmu.i386' ]
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^RedHat-6/: {
-      $package_name_default       = 'tcl-devel.i686'
+      $package_name_default       = [ 'tcl-devel.i686', 'libXmu.i686' ]
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^SLED-10|SLES-10/: {
       if $::architecture == 'x86_64' {
-        $package_name_default     = 'tcl-32bit'
+        $package_name_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
       } else {
-        $package_name_default     = 'tcl'
+        $package_name_default     = [ 'tcl', 'xorg-x11-libXmu' ]
       }
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^SLED-11|SLES-11/: {
       if $::architecture == 'x86_64' {
-        $package_name_default     = 'tcl-32bit'
+        $package_name_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
       } else {
-        $package_name_default     = 'tcl'
+        $package_name_default     = [ 'tcl', 'xorg-x11-libXmu' ]
       }
       $rndrelease_version_default = 'LMWP 3.1'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
@@ -126,7 +126,7 @@ class arc (
   }
 
   if $package_name_real != undef {
-    validate_string($package_name_real)
+    validate_array($package_name_real)
   }
 
   if $package_source_real != undef {
