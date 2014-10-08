@@ -30,9 +30,9 @@ class arc (
     }
     /^SLED-10|SLES-10/: {
       if $::architecture == 'x86_64' {
-        $packages_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
+        $packages_default     = [ 'tcl-32bit' ]
       } else {
-        $packages_default     = [ 'tcl', 'xorg-x11-libXmu' ]
+        $packages_default     = [ 'tcl' ]
       }
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
