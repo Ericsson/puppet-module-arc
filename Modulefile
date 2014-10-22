@@ -1,0 +1,10 @@
+name         'phil-friderici-afs'
+version      '0.2.0'
+source       'git@github.com:Phil-Friderici/puppet-module-arc.git'
+author       'Phil-Friderici'
+license      'Apache License, Version 2.0'
+summary      'Manage OpenAFS additions'
+description  'Manage OpenAFS additions'
+project_page 'https://github.com/Phil-Friderici/puppet-module-arc'
+
+dependency 'puppetlabs/stdlib', '>= 3.2.0'
