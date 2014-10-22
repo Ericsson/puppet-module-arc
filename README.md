@@ -10,9 +10,9 @@ This module assumes that you have OpenAFS installed. It is ment to be used in co
 
 This module provides OS default values for these OSfamilies:
 
- * RedHat
- * Suse
- * Solaris
+ * RedHat 5/6
+ * Solaris 10
+ * Suse 10/11
 
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 
