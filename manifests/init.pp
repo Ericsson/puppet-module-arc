@@ -28,6 +28,11 @@ class arc (
       $rndrelease_version_default = 'LMWP 2.3'
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
+    /^RedHat-7/: {
+      $package_name_default       = 'tcl.i686'
+      $rndrelease_version_default = 'RHEL 7'
+      $symlink_target_default     = '/usr/lib/libtcl8.5.so'
+    }
     /^SLED-10|SLES-10/: {
       if $::architecture == 'x86_64' {
         $packages_default     = [ 'tcl-32bit' ]
