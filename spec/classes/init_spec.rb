@@ -20,6 +20,14 @@ describe 'arc' do
         :rndrelease_version_default => 'LMWP 2.3',
         :symlink_target_default     => '/usr/lib/libtcl8.5.so',
       },
+    'RedHat-7 x86_64' =>
+      { :operatingsystem            => 'RedHat',
+        :operatingsystemrelease     => '7',
+        :architecture               => 'x86_64',
+        :package_name_default       => nil,
+        :rndrelease_version_default => 'LMWP 2.3',
+        :symlink_target_default     => '/usr/lib/libtcl.so.5',
+      },
     'SLED-10 x86_64' =>
       { :operatingsystem            => 'SLED',
         :operatingsystemrelease     => '10',
@@ -86,12 +94,14 @@ describe 'arc' do
         }
 
         # package { '$packages_real': }
-        v[:package_name_default].each do |package|
-          it {
-            should contain_package(package).with({
-              'ensure' => 'present',
-            })
-          }
+        if v[:package_name_default] != nil
+          v[:package_name_default].each do |package|
+            it {
+              should contain_package(package).with({
+                'ensure' => 'present',
+              })
+            }
+          end
         end
 
       end
