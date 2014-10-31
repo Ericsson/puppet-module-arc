@@ -62,23 +62,7 @@ class arc (
   }
   # </define os default values>
 
-
-  # <USE_DEFAULTS vs OS defaults>
-  # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
-  if (
-    ($packages           == 'USE_DEFAULTS') or
-    ($rndrelease_version == 'USE_DEFAULTS') or
-    ($symlink_target     == 'USE_DEFAULTS')
-  ) and $os_defaults_missing == true {
-      fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.")
-  }
-  # </USE_DEFAULTS vs OS defaults>
-
-
-  # <assign variables>
-  # Change 'USE_DEFAULTS' to OS specific default values
-  # Convert strings with booleans to real boolean, if needed
-
+  # <convert possible strings to booleans>
   if type($create_rndrelease) == 'boolean' {
     $create_rndrelease_real = $create_rndrelease
   } else {
@@ -96,6 +80,23 @@ class arc (
   } else {
     $install_package_real = str2bool($install_package)
   }
+  # </convert possible strings to booleans>
+
+  # <USE_DEFAULTS vs OS defaults>
+  # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
+  if (
+    ($packages           == 'USE_DEFAULTS' and $install_package_real   != true) or
+    ($rndrelease_version == 'USE_DEFAULTS' and $create_rndrelease_real != true) or
+    ($symlink_target     == 'USE_DEFAULTS' and $create_symlink_real    != true)
+  ) and $os_defaults_missing == true {
+      fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.")
+  }
+  # </USE_DEFAULTS vs OS defaults>
+
+
+  # <assign variables>
+  # Change 'USE_DEFAULTS' to OS specific default values
+  # Convert strings with booleans to real boolean, if needed
 
   $package_adminfile_real = $package_adminfile
 

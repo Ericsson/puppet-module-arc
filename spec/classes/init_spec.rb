@@ -108,7 +108,7 @@ describe 'arc' do
     end
   end
 
-  describe "with package attributes set for Solaris usage" do
+  describe 'with package attributes set for Solaris usage' do
     let :facts do
       { :operatingsystem        => 'Solaris',
         :operatingsystemrelease => '10_u11',
@@ -156,6 +156,73 @@ describe 'arc' do
         })
       }
     end
-
   end
+
+  describe 'with create_rndrelease set to' do
+    ['false',false].each do |value|
+      context value do
+        let :facts do
+          { :operatingsystem        => 'RedHat',
+            :operatingsystemrelease => '5',
+            :architecture           => 'x86_64',
+          }
+        end
+        let :params do
+          { :create_rndrelease => value,
+          }
+        end
+
+        it { should compile.with_all_deps }
+
+        it { should_not contain_file('arc_rndrelease') }
+
+      end
+    end
+  end
+
+  describe 'with create_symlink set to' do
+    ['false',false].each do |value|
+      context value do
+        let :facts do
+          { :operatingsystem        => 'RedHat',
+            :operatingsystemrelease => '5',
+            :architecture           => 'x86_64',
+          }
+        end
+        let :params do
+          { :create_symlink => value,
+          }
+        end
+
+        it { should compile.with_all_deps }
+
+        it { should_not contain_file('arc_symlink') }
+
+      end
+    end
+  end
+
+  describe 'with install_package set to' do
+    ['false',false].each do |value|
+      context value do
+        let :facts do
+          { :operatingsystem        => 'RedHat',
+            :operatingsystemrelease => '5',
+            :architecture           => 'x86_64',
+          }
+        end
+        let :params do
+          { :install_package => value,
+          }
+        end
+
+        it { should compile.with_all_deps }
+
+        it { should_not contain_package('tcl-devel.i386') }
+        it { should_not contain_package('libXmu.i386') }
+
+      end
+    end
+  end
+
 end
