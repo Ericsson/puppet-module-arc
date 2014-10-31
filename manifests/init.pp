@@ -20,41 +20,56 @@ class arc (
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     /^RedHat-5/: {
       $packages_default           = [ 'tcl-devel.i386', 'libXmu.i386' ]
-      $rndrelease_version_default = 'LMWP 2.3'
+      $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^RedHat-6/: {
       $packages_default           = [ 'tcl-devel.i686', 'libXmu.i686' ]
-      $rndrelease_version_default = 'LMWP 2.3'
+      $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^RedHat-7/: {
       $packages_default           = undef
-      $rndrelease_version_default = 'LMWP 2.3'
+      $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl.so.5'
     }
     /^SLED-10|SLES-10/: {
-      if $::architecture == 'x86_64' {
-        $packages_default     = [ 'tcl-32bit' ]
-      } else {
-        $packages_default     = [ 'tcl' ]
+      $packages_default = $::architecture ? {
+        'x86_64' => [ 'tcl-32bit' ],
+        default  => [ 'tcl' ],
       }
-      $rndrelease_version_default = 'LMWP 2.3'
+      $rndrelease_version_default = $::operatingsystemrelease ? {
+        '10.0'  => 'LMWP 2.0',
+        '10.1'  => 'LMWP 2.1',
+        '10.2'  => 'LMWP 2.2',
+        '10.3'  => 'LMWP 2.3',
+        '10.4'  => 'LMWP 2.4',
+        default => undef,
+      }
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^SLED-11|SLES-11/: {
-      if $::architecture == 'x86_64' {
-        $packages_default     = [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ]
-      } else {
-        $packages_default     = [ 'tcl', 'xorg-x11-libXmu' ]
+      $packages_default = $::architecture ? {
+        'x86_64' => [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ],
+        default  => [ 'tcl', 'xorg-x11-libXmu' ],
       }
-      $rndrelease_version_default = 'LMWP 3.1'
+      $rndrelease_version_default = $::operatingsystemrelease ? {
+        '11.0'  => 'LMWP 3.0',
+        '11.1'  => 'LMWP 3.1',
+        '11.2'  => 'LMWP 3.2',
+        '11.3'  => 'LMWP 3.3',
+        default => undef,
+      }
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^Solaris/: {
-      $packages_default           = undef
-      $rndrelease_version_default = "UMWP 3.3 Solaris ${::operatingsystemrelease} SPARC"
-      $symlink_target_default     = undef
+      $packages_default = undef
+      $rndrelease_version_default = $::kernelrelease ? {
+        '5.9'  => 'UMWP 2.0',
+        '5.10' => 'UMWP 3.0',
+        default => undef,
+      }
+      $symlink_target_default = undef
     }
     default: {
       $os_defaults_missing = true
@@ -62,7 +77,7 @@ class arc (
   }
   # </define os default values>
 
-  # <convert possible strings to booleans>
+  # <convert stringified booleans>
   if type($create_rndrelease) == 'boolean' {
     $create_rndrelease_real = $create_rndrelease
   } else {
@@ -80,7 +95,7 @@ class arc (
   } else {
     $install_package_real = str2bool($install_package)
   }
-  # </convert possible strings to booleans>
+  # </convert stringified booleans>
 
   # <USE_DEFAULTS vs OS defaults>
   # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
@@ -92,7 +107,6 @@ class arc (
       fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.")
   }
   # </USE_DEFAULTS vs OS defaults>
-
 
   # <assign variables>
   # Change 'USE_DEFAULTS' to OS specific default values
@@ -119,7 +133,6 @@ class arc (
   }
 
   # </assign variables>
-
 
   # <validating variables>
 
@@ -150,7 +163,7 @@ class arc (
 
   # <Do Stuff>
 
-  if $create_rndrelease_real == true {
+  if ($create_rndrelease_real == true and $rndrelease_version_real != undef) {
     file { 'arc_rndrelease':
       ensure  => present,
       path    => '/etc/rndrelease',
@@ -159,7 +172,7 @@ class arc (
     }
   }
 
-  if $create_symlink_real == true {
+  if ($create_symlink_real == true and $symlink_target_real != undef) {
     file { 'arc_symlink':
       ensure  => link,
       path    => '/usr/lib/libtcl.so.0',
