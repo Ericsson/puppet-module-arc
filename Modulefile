@@ -1,5 +1,5 @@
 name         'phil-friderici-arc'
-version      '0.5.0'
+version      '0.6.0'
 source       'git@github.com:Phil-Friderici/puppet-module-arc.git'
 author       'Phil-Friderici'
 license      'Apache License, Version 2.0'
