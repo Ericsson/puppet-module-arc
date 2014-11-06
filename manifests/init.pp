@@ -62,6 +62,10 @@ class arc (
       }
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
+    /^(SLED|SLES)-12/: {
+      $packages_default = [ 'tcl-32bit', 'libXmu6-32bit' ]
+      $symlink_target_default     = '/usr/lib/libtcl8.6.so'
+    }
     /^Solaris/: {
       $packages_default = undef
       $rndrelease_version_default = $::kernelrelease ? {

@@ -12,7 +12,7 @@ This module provides OS default values for these OSfamilies:
 
  * RedHat 5/6
  * Solaris 10
- * Suse 10/11
+ * Suse 10/11/12
 
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 

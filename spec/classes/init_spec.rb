@@ -210,6 +210,22 @@ describe 'arc' do
         :rndrelease_version_default => nil,
         :symlink_target_default     => '/usr/lib/libtcl8.5.so',
       },
+      'SLES-12.0 x86_64' =>
+      { :operatingsystem            => 'SLES',
+        :operatingsystemrelease     => '12.0',
+        :architecture               => 'x86_64',
+        :package_name_default       => [ 'tcl-32bit', 'libXmu6-32bit' ],
+        :rndrelease_version_default => nil,
+        :symlink_target_default     => '/usr/lib/libtcl8.6.so',
+      },
+      'SLED-12.0 x86_64' =>
+      { :operatingsystem            => 'SLED',
+        :operatingsystemrelease     => '12.0',
+        :architecture               => 'x86_64',
+        :package_name_default       => [ 'tcl-32bit', 'libXmu6-32bit' ],
+        :rndrelease_version_default => nil,
+        :symlink_target_default     => '/usr/lib/libtcl8.6.so',
+      },
     'Solaris 9' =>
       { :operatingsystem            => 'Solaris',
         :operatingsystemrelease     => '5.9',
