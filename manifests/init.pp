@@ -33,7 +33,7 @@ class arc (
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl.so.5'
     }
-    /^SLED-10|SLES-10/: {
+    /^(SLED|SLES)-10/: {
       $packages_default = $::architecture ? {
         'x86_64' => [ 'tcl-32bit' ],
         default  => [ 'tcl' ],
@@ -48,7 +48,7 @@ class arc (
       }
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
-    /^SLED-11|SLES-11/: {
+    /^(SLED|SLES)-11/: {
       $packages_default = $::architecture ? {
         'x86_64' => [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ],
         default  => [ 'tcl', 'xorg-x11-libXmu' ],
