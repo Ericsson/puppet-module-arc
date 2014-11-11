@@ -178,9 +178,9 @@ class arc (
 
   if ($create_symlink_real == true and $symlink_target_real != undef) {
     file { 'arc_symlink':
-      ensure  => link,
-      path    => '/usr/lib/libtcl.so.0',
-      target  => $symlink_target_real,
+      ensure => link,
+      path   => '/usr/lib/libtcl.so.0',
+      target => $symlink_target_real,
     }
   }
 
