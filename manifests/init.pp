@@ -167,13 +167,17 @@ class arc (
 
   # <Do Stuff>
 
-  if ($create_rndrelease_real == true and $rndrelease_version_real != undef) {
-    file { 'arc_rndrelease':
-      ensure  => present,
-      path    => '/etc/rndrelease',
-      mode    => '0644',
-      content => "${rndrelease_version_real}\n",
-    }
+  if ($create_rndrelease_real == false or $rndrelease_version_real == undef) {
+    $rndrelease_ensure = 'absent'
+  } else {
+    $rndrelease_ensure = 'present'
+  }
+
+  file { 'arc_rndrelease':
+    ensure  => $rndrelease_ensure,
+    path    => '/etc/rndrelease',
+    mode    => '0644',
+    content => "${rndrelease_version_real}\n",
   }
 
   if ($create_symlink_real == true and $symlink_target_real != undef) {

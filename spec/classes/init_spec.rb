@@ -261,7 +261,12 @@ describe 'arc' do
 
         # file { 'arc_rndrelease' :}
         if v[:rndrelease_version_default] == nil
-          it { should_not contain_file('arc_rndrelease') }
+          it {
+            should contain_file('arc_rndrelease').with({
+              'ensure'  => 'absent',
+              'path'    => '/etc/rndrelease',
+            })
+          }
         else
           it {
             should contain_file('arc_rndrelease').with({
@@ -346,7 +351,12 @@ describe 'arc' do
 
         it { should compile.with_all_deps }
 
-        it { should_not contain_file('arc_rndrelease') }
+        it {
+          should contain_file('arc_rndrelease').with({
+            'ensure'  => 'absent',
+            'path'    => '/etc/rndrelease',
+          })
+        }
 
       end
     end
