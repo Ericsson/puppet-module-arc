@@ -22,6 +22,7 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 create_rndrelease
 =================
 Boolean to trigger creation of /etc/rndrelease file.
+If set to false /etc/rndrelease will be deleted.
 
 - *Default*: true
 
@@ -71,6 +72,7 @@ Solaris specific: string with package source.
 rndrelease_version
 ==================
 String containing the content for /etc/rndrelease.
+If set to undef /etc/rndrelease will be deleted.
 
 - *Default*: 'USE_DEFAULTS', based on OS platform
 
