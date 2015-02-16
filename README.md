@@ -17,6 +17,11 @@ This module provides OS default values for these OSfamilies:
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 
 
+# Version history #
+- 1.0.1 2015-02-16 deprecate type() as preparation for Puppet v4. Requires stdlib >= 4.2 now
+- 1.0.0 2014-11-13 initial release
+
+
 # Parameters #
 
 create_rndrelease

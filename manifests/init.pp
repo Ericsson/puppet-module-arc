@@ -82,19 +82,19 @@ class arc (
   # </define os default values>
 
   # <convert stringified booleans>
-  if type($create_rndrelease) == 'boolean' {
+  if is_bool($create_rndrelease) == true {
     $create_rndrelease_real = $create_rndrelease
   } else {
     $create_rndrelease_real = str2bool($create_rndrelease)
   }
 
-  if type($create_symlink) == 'boolean' {
+  if is_bool($create_symlink) == true {
     $create_symlink_real = $create_symlink
   } else {
     $create_symlink_real = str2bool($create_symlink)
   }
 
-  if type($install_package) == 'boolean' {
+  if is_bool($install_package) == true {
     $install_package_real = $install_package
   } else {
     $install_package_real = str2bool($install_package)
