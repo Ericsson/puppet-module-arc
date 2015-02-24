@@ -5,7 +5,6 @@ Puppet Module to manage tcl-devel package, libtcl symlink and /etc/rndrelease.
 
 This module assumes that you have OpenAFS installed. It is ment to be used in cooperation with puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
 
-
 # Compatability #
 
 This module provides OS default values for these OSfamilies:
@@ -13,11 +12,13 @@ This module provides OS default values for these OSfamilies:
  * RedHat 5/6/7
  * Solaris 9/10
  * Suse 10/11/12
+ * Ubuntu 12.04/14.04
 
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 
 
 # Version history #
+- 1.1.0 2015-02-24 add Ubuntu support for 12.04/14.04
 - 1.0.1 2015-02-16 deprecate type() as preparation for Puppet v4. Requires stdlib >= 4.2 now
 - 1.0.0 2014-11-13 initial release
 
