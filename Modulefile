@@ -1,5 +1,5 @@
 name         'puppet-module-arc'
-version      '1.0.1'
+version      '1.1.0'
 source       'git@github.com:Phil-Friderici/puppet-module-arc.git'
 author       'phil.friderici@ericsson.com'
 license      'Apache-2.0'
