@@ -75,6 +75,11 @@ class arc (
       }
       $symlink_target_default = undef
     }
+    /^Ubuntu-(12.04|14.04)/: {
+      $packages_default           = [ 'libx11-6:i386', 'libc6:i386' ]
+      $rndrelease_version_default = undef
+      $symlink_target_default     = undef
+    }
     default: {
       $os_defaults_missing = true
     }
@@ -178,6 +183,20 @@ class arc (
     path    => '/etc/rndrelease',
     mode    => '0644',
     content => "${rndrelease_version_real}\n",
+  }
+
+  if $::operatingsystem == 'Ubuntu' {
+    file { 'awk_symlink':
+      ensure => link,
+      path   => '/bin/awk',
+      target => '/usr/bin/awk',
+    }
+
+    exec { 'locale-gen':
+      command => '/usr/sbin/locale-gen en_US',
+      unless  => 'grep ^en_US\ ISO-8859-1$ /var/lib/locales/supported.d/local',
+      path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+    }
   }
 
   if ($create_symlink_real == true and $symlink_target_real != undef) {
