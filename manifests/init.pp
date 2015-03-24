@@ -19,24 +19,24 @@ class arc (
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
     /^RedHat-5/: {
-      $packages_default           = [ 'tcl-devel.i386', 'libXmu.i386' ]
+      $packages_default           = [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh'  ]
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^RedHat-6/: {
-      $packages_default           = [ 'tcl-devel.i686', 'libXmu.i686' ]
+      $packages_default           = [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^RedHat-7/: {
-      $packages_default           = undef
+      $packages_default           = [ 'tcsh' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl.so.5'
     }
     /^(SLED|SLES)-10/: {
       $packages_default = $::architecture ? {
-        'x86_64' => [ 'tcl-32bit' ],
-        default  => [ 'tcl' ],
+        'x86_64' => [ 'tcl-32bit', 'tcsh' ],
+        default  => [ 'tcl', 'tcsh' ],
       }
       $rndrelease_version_default = $::operatingsystemrelease ? {
         '10.0'  => 'LMWP 2.0',
@@ -50,8 +50,8 @@ class arc (
     }
     /^(SLED|SLES)-11/: {
       $packages_default = $::architecture ? {
-        'x86_64' => [ 'tcl-32bit', 'xorg-x11-libXmu-32bit' ],
-        default  => [ 'tcl', 'xorg-x11-libXmu' ],
+        'x86_64' => [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
+        default  => [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
       }
       $rndrelease_version_default = $::operatingsystemrelease ? {
         '11.0'  => 'LMWP 3.0',
@@ -63,7 +63,7 @@ class arc (
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^(SLED|SLES)-12/: {
-      $packages_default = [ 'tcl-32bit', 'libXmu6-32bit' ]
+      $packages_default = [ 'libXmu6-32bit', 'tcl-32bit', 'tcsh' ]
       $symlink_target_default     = '/usr/lib/libtcl8.6.so'
     }
     /^Solaris/: {
@@ -76,7 +76,7 @@ class arc (
       $symlink_target_default = undef
     }
     /^Ubuntu-(12.04|14.04)/: {
-      $packages_default           = [ 'libx11-6:i386', 'libc6:i386' ]
+      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
