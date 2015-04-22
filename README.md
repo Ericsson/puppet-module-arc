@@ -34,6 +34,14 @@ If set to false /etc/rndrelease will be deleted.
 - *Default*: true
 
 
+manage_rndrelease
+=================
+Boolean to trigger management of /etc/rndrelease file.
+If set to false /etc/rndrelease will not be managed.
+
+- *Default*: true
+
+
 create_symlink
 ==============
 Boolean to trigger creation of libtcl symlink.

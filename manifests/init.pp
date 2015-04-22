@@ -3,6 +3,7 @@
 # Manages tcl-devel package, libtcl symlink and /etc/rndrelease.
 
 class arc (
+  $manage_rndrelease  = true,
   $create_rndrelease  = true,
   $create_symlink     = true,
   $install_package    = true,
@@ -93,6 +94,12 @@ class arc (
     $create_rndrelease_real = str2bool($create_rndrelease)
   }
 
+  if is_bool($manage_rndrelease) == true {
+    $manage_rndrelease_real = $manage_rndrelease
+  } else {
+    $manage_rndrelease_real = str2bool($manage_rndrelease)
+  }
+
   if is_bool($create_symlink) == true {
     $create_symlink_real = $create_symlink
   } else {
@@ -146,6 +153,7 @@ class arc (
   # <validating variables>
 
   validate_bool($create_rndrelease_real)
+  validate_bool($manage_rndrelease_real)
   validate_bool($create_symlink_real)
   validate_bool($install_package_real)
 
@@ -178,11 +186,13 @@ class arc (
     $rndrelease_ensure = 'present'
   }
 
-  file { 'arc_rndrelease':
-    ensure  => $rndrelease_ensure,
-    path    => '/etc/rndrelease',
-    mode    => '0644',
-    content => "${rndrelease_version_real}\n",
+  if $manage_rndrelease_real == true {
+    file { 'arc_rndrelease':
+      ensure  => $rndrelease_ensure,
+      path    => '/etc/rndrelease',
+      mode    => '0644',
+      content => "${rndrelease_version_real}\n",
+    }
   }
 
   if $::operatingsystem == 'Ubuntu' {
