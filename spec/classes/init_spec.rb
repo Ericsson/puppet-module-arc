@@ -399,6 +399,29 @@ describe 'arc' do
     end
   end
 
+  describe 'with manage_rndrelease set to false' do
+    ['false', false].each do |value|
+      context value do
+        let :facts do
+          { :operatingsystem        => 'RedHat',
+            :operatingsystemrelease => '5',
+            :architecture           => 'x86_64',
+          }
+        end
+        let :params do
+          { :manage_rndrelease => value,
+          }
+        end
+
+        it { should compile.with_all_deps }
+
+        it {
+          should_not contain_file('arc_rndrelease')
+        }
+      end
+    end
+  end
+
   describe 'with create_symlink set to' do
     ['false',false].each do |value|
       context value do
