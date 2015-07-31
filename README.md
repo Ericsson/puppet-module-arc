@@ -7,6 +7,10 @@ This module assumes that you have OpenAFS installed. It is ment to be used in co
 
 # Compatability #
 
+This module has been tested to work on the following systems with Puppet v3
+(with and without the future parser) and Puppet v4 with Ruby versions 1.8.7,
+1.9.3, 2.0.0 and 2.1.0.
+
 This module provides OS default values for these OSfamilies:
 
  * RedHat 5/6/7
@@ -18,6 +22,7 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+- 1.2.1 2015-07-31 support for Puppet v4
 - 1.2.0 2015-05-06 add ability to unmanage rndrelease file
 - 1.1.1 2015-03-24 manage tcsh package as dependency
 - 1.1.0 2015-02-24 add Ubuntu support for 12.04/14.04
