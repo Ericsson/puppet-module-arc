@@ -34,7 +34,7 @@ class arc (
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
-    /^(SLED|SLES)-10/: {
+    /^(SLED-10|SLES-10)/: {
       $packages_default = $::architecture ? {
         'x86_64' => [ 'tcl-32bit', 'tcsh' ],
         default  => [ 'tcl', 'tcsh' ],
@@ -49,7 +49,7 @@ class arc (
       }
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
-    /^(SLED|SLES)-11/: {
+    /^(SLED-11|SLES-11)/: {
       $packages_default = $::architecture ? {
         'x86_64' => [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         default  => [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
@@ -63,20 +63,21 @@ class arc (
       }
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
-    /^(SLED|SLES)-12/: {
-      $packages_default = [ 'libXmu6-32bit', 'tcl-32bit', 'tcsh' ]
+    /^(SLED-12|SLES-12)/: {
+      $packages_default           = [ 'libXmu6-32bit', 'tcl-32bit', 'tcsh' ]
+      $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.6.so'
     }
     /^Solaris/: {
-      $packages_default = undef
+      $packages_default           = undef
       $rndrelease_version_default = $::kernelrelease ? {
         '5.9'  => 'UMWP 2.0',
         '5.10' => 'UMWP 3.0',
         default => undef,
       }
-      $symlink_target_default = undef
+      $symlink_target_default     = undef
     }
-    /^Ubuntu-(12.04|14.04)/: {
+    /^(Ubuntu-12.04|Ubuntu-14.04)/: {
       $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
