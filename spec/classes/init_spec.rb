@@ -24,7 +24,7 @@ describe 'arc' do
         :architecture               => 'x86_64',
         :package_name_default       => [ 'tcsh' ],
         :rndrelease_version_default => nil,
-        :symlink_target_default     => '/usr/lib/libtcl.so.5',
+        :symlink_target_default     => nil,
       },
     'SLED-10.0 i386' =>
       { :operatingsystem            => 'SLED',
