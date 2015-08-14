@@ -3,7 +3,8 @@ puppet-module-arc
 
 Puppet Module to manage tcl-devel package, libtcl symlink and /etc/rndrelease.
 
-This module assumes that you have OpenAFS installed. It is ment to be used in cooperation with puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
+This module assumes that you have OpenAFS installed. It is ment to be used in cooperation with
+puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
 
 # Compatability #
 
@@ -22,6 +23,7 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+- 1.2.2 2015-08-14 drop unneeded 32bit support on RedHat 7
 - 1.2.1 2015-07-31 support for Puppet v4
 - 1.2.0 2015-05-06 add ability to unmanage rndrelease file
 - 1.1.1 2015-03-24 manage tcsh package as dependency
