@@ -32,7 +32,7 @@ class arc (
     /^RedHat-7/: {
       $packages_default           = [ 'tcsh' ]
       $rndrelease_version_default = undef
-      $symlink_target_default     = '/usr/lib/libtcl.so.5'
+      $symlink_target_default     = undef
     }
     /^(SLED|SLES)-10/: {
       $packages_default = $::architecture ? {
