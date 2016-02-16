@@ -1,0 +1,10 @@
+[Desktop Entry]
+X-SuSE-translate=true
+Categories=Development;System;
+Encoding=UTF-8
+Exec=/app/arc/0/bin/arc_console
+Type=Application
+Name=ARC Console
+GenericName=ARC Console
+Icon=gnome-color-xterm.png
+X-KDE-StartupNotify=true

@@ -3,16 +3,18 @@
 # Manages tcl-devel package, libtcl symlink and /etc/rndrelease.
 
 class arc (
-  $manage_rndrelease  = true,
-  $create_rndrelease  = true,
-  $create_symlink     = true,
-  $install_package    = true,
-  $package_adminfile  = undef,
-  $packages           = 'USE_DEFAULTS',
-  $package_provider   = undef,
-  $package_source     = undef,
-  $rndrelease_version = 'USE_DEFAULTS',
-  $symlink_target     = 'USE_DEFAULTS',
+  $manage_rndrelease       = true,
+  $create_rndrelease       = true,
+  $create_symlink          = true,
+  $install_package         = true,
+  $package_adminfile       = undef,
+  $packages                = 'USE_DEFAULTS',
+  $package_provider        = undef,
+  $package_source          = undef,
+  $rndrelease_version      = 'USE_DEFAULTS',
+  $symlink_target          = 'USE_DEFAULTS',
+  $manage_arc_console_icon = false,
+  $arc_console_icon        = false,
 ) {
 
   # <define os default values>
@@ -112,6 +114,18 @@ class arc (
   } else {
     $install_package_real = str2bool($install_package)
   }
+
+  if is_bool($arc_console_icon) == true {
+    $arc_console_icon_real = $arc_console_icon
+  } else {
+    $arc_console_icon_real = str2bool($arc_console_icon)
+  }
+
+  if is_bool($manage_arc_console_icon) == true {
+    $manage_arc_console_icon_real = $manage_arc_console_icon
+  } else {
+    $manage_arc_console_icon_real = str2bool($manage_arc_console_icon)
+  }
   # </convert stringified booleans>
 
   # <USE_DEFAULTS vs OS defaults>
@@ -157,6 +171,8 @@ class arc (
   validate_bool($manage_rndrelease_real)
   validate_bool($create_symlink_real)
   validate_bool($install_package_real)
+  validate_bool($arc_console_icon_real)
+  validate_bool($manage_arc_console_icon_real)
 
   if $package_adminfile_real != undef {
     validate_string($package_adminfile_real)
@@ -242,6 +258,21 @@ class arc (
     }
   }
 
+  if $manage_arc_console_icon_real == true {
+    if $arc_console_icon_real == true {
+      file { 'arc_console.desktop':
+        ensure  => present,
+        path    => '/usr/share/applications/arc_console.desktop',
+        mode    => '0644',
+        source  => 'puppet:///modules/arc/arc_console.desktop',
+      }
+    } else {
+      file { 'arc_console.desktop':
+        ensure  => absent,
+        path    => '/usr/share/applications/arc_console.desktop',
+      }
+    }
+  }
   # </Stuff done>
 
 }

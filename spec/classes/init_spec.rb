@@ -307,6 +307,16 @@ describe 'arc' do
           }
         end
 
+        # file { 'arc_console_icon' :}
+        if v[:arc_console_icon] == true
+          it {
+            should contain_file('arc_module.desktop').with({
+              'ensure'  => 'present',
+              'path'    => '/usr/share/applications/arc_console.desktop',
+            })
+          }
+        end
+
         # Ubuntu specific special specialities
         if v[:operatingsystem] == 'Ubuntu'
           it {
@@ -392,6 +402,33 @@ describe 'arc' do
           should contain_file('arc_rndrelease').with({
             'ensure'  => 'absent',
             'path'    => '/etc/rndrelease',
+          })
+        }
+
+      end
+    end
+  end
+
+  describe 'with arc_console_icon set to' do
+    ['false',false].each do |value|
+      context value do
+        let :facts do
+          { :operatingsystem        => 'RedHat',
+            :operatingsystemrelease => '5',
+            :architecture           => 'x86_64',
+          }
+        end
+        let :params do
+          { :arc_console_icon => value,
+          }
+        end
+
+        it { should compile.with_all_deps }
+
+        it {
+          should contain_file('arc_console.desktop').with({
+            'ensure'  => 'absent',
+            'path'    => '/usr/share/applications/arc_console.desktop',
           })
         }
 

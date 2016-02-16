@@ -106,6 +106,12 @@ Absolute path to the target of the libtcl symlink.
 
 - *Default*: 'USE_DEFAULTS', based on OS platform
 
+arc_console_icon
+==============
+Creates arc_console.desktop for the the arc_console
+
+- *Default*: false
+
 
 Hiera example:
 <pre>
