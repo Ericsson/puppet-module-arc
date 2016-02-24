@@ -23,6 +23,7 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+- 1.3.0 2016-02-24 add possibility to manage arc console icon
 - 1.2.2 2015-08-14 drop unneeded 32bit support on RedHat 7
 - 1.2.1 2015-07-31 support for Puppet v4
 - 1.2.0 2015-05-06 add ability to unmanage rndrelease file
