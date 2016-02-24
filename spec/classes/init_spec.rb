@@ -307,16 +307,6 @@ describe 'arc' do
           }
         end
 
-        # file { 'arc_console_icon' :}
-        if v[:arc_console_icon] == true
-          it {
-            should contain_file('arc_module.desktop').with({
-              'ensure'  => 'present',
-              'path'    => '/usr/share/applications/arc_console.desktop',
-            })
-          }
-        end
-
         # Ubuntu specific special specialities
         if v[:operatingsystem] == 'Ubuntu'
           it {
@@ -409,9 +399,65 @@ describe 'arc' do
     end
   end
 
-  describe 'with arc_console_icon set to' do
-    ['false',false].each do |value|
-      context value do
+  describe 'with manage_arc_console_icon set to true' do
+    context 'when arc_console_icon is set to true' do
+      let :facts do
+        {
+          :operatingsystem        => 'RedHat',
+          :operatingsystemrelease => '5',
+          :architecture           => 'x86_64',
+        }
+      end
+      let :params do
+        {
+          :manage_arc_console_icon => true,
+          :arc_console_icon        => true,
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it {
+        should contain_file('arc_console.desktop').with({
+          'ensure' => 'file',
+          'path'   => '/usr/share/applications/arc_console.desktop',
+          'mode'   => '0644',
+          'owner'  => 'root',
+          'group'  => 'root',
+          'source' => 'puppet:///modules/arc/arc_console.desktop',
+        })
+      }
+    end
+
+    context 'when arc_console_icon is set to false' do
+      let :facts do
+        {
+          :operatingsystem        => 'RedHat',
+          :operatingsystemrelease => '5',
+          :architecture           => 'x86_64',
+        }
+      end
+      let :params do
+        {
+          :manage_arc_console_icon => true,
+          :arc_console_icon        => false,
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it {
+        should contain_file('arc_console.desktop').with({
+          'ensure' => 'absent',
+          'path'   => '/usr/share/applications/arc_console.desktop',
+        })
+      }
+    end
+  end
+
+  describe 'with manage_arc_console_icon set to false' do
+    [true,false].each do |value|
+      context "when arc_console_icon is set to #{value}" do
         let :facts do
           { :operatingsystem        => 'RedHat',
             :operatingsystemrelease => '5',
@@ -419,19 +465,15 @@ describe 'arc' do
           }
         end
         let :params do
-          { :arc_console_icon => value,
+          {
+            :manage_arc_console_icon => false,
+            :arc_console_icon        => value,
           }
         end
 
         it { should compile.with_all_deps }
 
-        it {
-          should contain_file('arc_console.desktop').with({
-            'ensure'  => 'absent',
-            'path'    => '/usr/share/applications/arc_console.desktop',
-          })
-        }
-
+        it { should_not contain_file('arc_console.desktop') }
       end
     end
   end
@@ -504,4 +546,48 @@ describe 'arc' do
     end
   end
 
+  describe 'variable type and content validations' do
+    # set needed custom facts and variables
+    let(:facts) do
+      {
+        :operatingsystem        => 'RedHat',
+        :operatingsystemrelease => '7',
+      }
+    end
+    let(:mandatory_params) do
+      {
+        #:param => 'value',
+      }
+    end
+
+    validations = {
+      'bool_stringified' => {
+        :name    => %w(arc_console_icon manage_arc_console_icon),
+        :valid   => [true, false, 'true', 'false'],
+        :invalid => ['invalid', %w(array), { 'ha' => 'sh' }, 3, 2.42, nil],
+        :message => '(Unknown type of boolean|str2bool\(\): Requires either string to work with)',
+      },
+    }
+
+    validations.sort.each do |type, var|
+      var[:name].each do |var_name|
+        var[:params] = {} if var[:params].nil?
+        var[:valid].each do |valid|
+          context "when #{var_name} (#{type}) is set to valid #{valid} (as #{valid.class})" do
+            let(:params) { [mandatory_params, var[:params], { :"#{var_name}" => valid, }].reduce(:merge) }
+            it { should compile }
+          end
+        end
+
+        var[:invalid].each do |invalid|
+          context "when #{var_name} (#{type}) is set to invalid #{invalid} (as #{invalid.class})" do
+            let(:params) { [mandatory_params, var[:params], { :"#{var_name}" => invalid, }].reduce(:merge) }
+            it 'should fail' do
+              expect { should contain_class(subject) }.to raise_error(Puppet::Error, /#{var[:message]}/)
+            end
+          end
+        end
+      end # var[:name].each
+    end # validations.sort.each
+  end # describe 'variable type and content validations'
 end

@@ -261,15 +261,17 @@ class arc (
   if $manage_arc_console_icon_real == true {
     if $arc_console_icon_real == true {
       file { 'arc_console.desktop':
-        ensure  => present,
-        path    => '/usr/share/applications/arc_console.desktop',
-        mode    => '0644',
-        source  => 'puppet:///modules/arc/arc_console.desktop',
+        ensure => file,
+        path   => '/usr/share/applications/arc_console.desktop',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0644',
+        source => 'puppet:///modules/arc/arc_console.desktop',
       }
     } else {
       file { 'arc_console.desktop':
-        ensure  => absent,
-        path    => '/usr/share/applications/arc_console.desktop',
+        ensure => absent,
+        path   => '/usr/share/applications/arc_console.desktop',
       }
     }
   }

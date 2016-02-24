@@ -106,9 +106,17 @@ Absolute path to the target of the libtcl symlink.
 
 - *Default*: 'USE_DEFAULTS', based on OS platform
 
+
+manage_arc_console_icon
+==============
+Boolean to trigger if arc_console.desktop should be managed.
+
+- *Default*: false
+
+
 arc_console_icon
 ==============
-Creates arc_console.desktop for the the arc_console
+Boolean to trigger creation (true) or deletion (false) of arc_console.desktop for the the arc_console.
 
 - *Default*: false
 
