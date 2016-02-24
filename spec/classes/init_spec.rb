@@ -1,5 +1,12 @@
 require 'spec_helper'
 describe 'arc' do
+  let :facts do
+    {
+      :operatingsystem        => 'RedHat',
+      :operatingsystemrelease => '7',
+      :architecture           => 'x86_64',
+    }
+  end
 
   platforms = {
     'RedHat-5 x86_64' =>
@@ -372,50 +379,25 @@ describe 'arc' do
     end
   end
 
-  describe 'with create_rndrelease set to' do
-    ['false',false].each do |value|
-      context value do
-        let :facts do
-          { :operatingsystem        => 'RedHat',
-            :operatingsystemrelease => '5',
-            :architecture           => 'x86_64',
-          }
-        end
-        let :params do
-          { :create_rndrelease => value,
-          }
-        end
+  context 'with create_rndrelease set to false' do
+    let(:params) { { :create_rndrelease => false } }
 
-        it { should compile.with_all_deps }
-
-        it {
-          should contain_file('arc_rndrelease').with({
-            'ensure'  => 'absent',
-            'path'    => '/etc/rndrelease',
-          })
-        }
-
-      end
-    end
+    it {
+      should contain_file('arc_rndrelease').with({
+        'ensure'  => 'absent',
+        'path'    => '/etc/rndrelease',
+      })
+    }
   end
 
-  describe 'with manage_arc_console_icon set to true' do
+  context 'with manage_arc_console_icon set to true' do
     context 'when arc_console_icon is set to true' do
-      let :facts do
-        {
-          :operatingsystem        => 'RedHat',
-          :operatingsystemrelease => '5',
-          :architecture           => 'x86_64',
-        }
-      end
       let :params do
         {
           :manage_arc_console_icon => true,
           :arc_console_icon        => true,
         }
       end
-
-      it { should compile.with_all_deps }
 
       it {
         should contain_file('arc_console.desktop').with({
@@ -430,21 +412,12 @@ describe 'arc' do
     end
 
     context 'when arc_console_icon is set to false' do
-      let :facts do
-        {
-          :operatingsystem        => 'RedHat',
-          :operatingsystemrelease => '5',
-          :architecture           => 'x86_64',
-        }
-      end
       let :params do
         {
           :manage_arc_console_icon => true,
           :arc_console_icon        => false,
         }
       end
-
-      it { should compile.with_all_deps }
 
       it {
         should contain_file('arc_console.desktop').with({
@@ -455,15 +428,9 @@ describe 'arc' do
     end
   end
 
-  describe 'with manage_arc_console_icon set to false' do
+  context 'with manage_arc_console_icon set to false' do
     [true,false].each do |value|
       context "when arc_console_icon is set to #{value}" do
-        let :facts do
-          { :operatingsystem        => 'RedHat',
-            :operatingsystemrelease => '5',
-            :architecture           => 'x86_64',
-          }
-        end
         let :params do
           {
             :manage_arc_console_icon => false,
@@ -471,79 +438,28 @@ describe 'arc' do
           }
         end
 
-        it { should compile.with_all_deps }
-
         it { should_not contain_file('arc_console.desktop') }
       end
     end
   end
 
-  describe 'with manage_rndrelease set to false' do
-    ['false', false].each do |value|
-      context value do
-        let :facts do
-          { :operatingsystem        => 'RedHat',
-            :operatingsystemrelease => '5',
-            :architecture           => 'x86_64',
-          }
-        end
-        let :params do
-          { :manage_rndrelease => value,
-          }
-        end
+  context 'with manage_rndrelease set to false' do
+    let(:params) { { :manage_rndrelease => false } }
 
-        it { should compile.with_all_deps }
-
-        it {
-          should_not contain_file('arc_rndrelease')
-        }
-      end
-    end
+    it { should_not contain_file('arc_rndrelease') }
   end
 
-  describe 'with create_symlink set to' do
-    ['false',false].each do |value|
-      context value do
-        let :facts do
-          { :operatingsystem        => 'RedHat',
-            :operatingsystemrelease => '5',
-            :architecture           => 'x86_64',
-          }
-        end
-        let :params do
-          { :create_symlink => value,
-          }
-        end
+  context 'with create_symlink set to false' do
+    let(:params) { { :create_symlink => false } }
 
-        it { should compile.with_all_deps }
-
-        it { should_not contain_file('arc_symlink') }
-
-      end
-    end
+    it { should_not contain_file('arc_symlink') }
   end
 
-  describe 'with install_package set to' do
-    ['false',false].each do |value|
-      context value do
-        let :facts do
-          { :operatingsystem        => 'RedHat',
-            :operatingsystemrelease => '5',
-            :architecture           => 'x86_64',
-          }
-        end
-        let :params do
-          { :install_package => value,
-          }
-        end
+  context 'with install_package set to false' do
+    let(:params) { { :install_package => false } }
 
-        it { should compile.with_all_deps }
-
-        it { should_not contain_package('tcl-devel.i386') }
-        it { should_not contain_package('libXmu.i386') }
-
-      end
-    end
+    it { should_not contain_package('tcl-devel.i386') }
+    it { should_not contain_package('libXmu.i386') }
   end
 
   describe 'variable type and content validations' do
@@ -561,8 +477,20 @@ describe 'arc' do
     end
 
     validations = {
+      'absolute_path' => {
+        :name    => %w(symlink_target),
+        :valid   => ['/absolute/filepath', '/absolute/directory/', %w(/array /with/paths)],
+        :invalid => ['../invalid', 3, 2.42, %w(array), { 'ha' => 'sh' }, true, false, nil],
+        :message => 'is not an absolute path',
+      },
+      'array' => {
+        :name    => %w(packages),
+        :valid   => [%w(ar ray)],
+        :invalid => ['string', { 'ha' => 'sh' }, 3, 2.42, true, false, nil],
+        :message => 'is not an Array',
+      },
       'bool_stringified' => {
-        :name    => %w(arc_console_icon manage_arc_console_icon),
+        :name    => %w(arc_console_icon create_rndrelease create_symlink install_package manage_arc_console_icon manage_rndrelease),
         :valid   => [true, false, 'true', 'false'],
         :invalid => ['invalid', %w(array), { 'ha' => 'sh' }, 3, 2.42, nil],
         :message => '(Unknown type of boolean|str2bool\(\): Requires either string to work with)',
