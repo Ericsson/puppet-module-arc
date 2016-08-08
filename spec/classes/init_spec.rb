@@ -352,8 +352,9 @@ describe 'arc' do
 
   describe 'with Solaris specific package attributes' do
     let :facts do
-      { :operatingsystem => 'Solaris',
-        :kernelrelease   => '5.10',
+      { :operatingsystem        => 'Solaris',
+        :kernelrelease          => '5.10',
+        :operatingsystemrelease => nil,
       }
     end
     let :params do
