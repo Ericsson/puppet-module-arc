@@ -266,7 +266,7 @@ class arc (
         owner  => 'root',
         group  => 'root',
         mode   => '0644',
-        source => 'puppet:///modules/arc/arc_console.desktop',
+        source => 'puppet:///modules/arc/arc_console.desktop', # lint:ignore:fileserver
       }
     } else {
       file { 'arc_console.desktop':
