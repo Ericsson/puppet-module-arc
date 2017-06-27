@@ -88,7 +88,7 @@ class arc (
     }
     /^(Ubuntu-12.04|Ubuntu-14.04)/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386' ]
+      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386', 'tcl-dev' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
