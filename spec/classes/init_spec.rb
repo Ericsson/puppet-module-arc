@@ -326,7 +326,7 @@ describe 'arc' do
           it {
             should contain_exec('locale-gen').with({
               'command' => '/usr/sbin/locale-gen en_US',
-              'unless'  => 'grep ^en_US\ ISO-8859-1$ /var/lib/locales/supported.d/local',
+              'unless'  => '/usr/bin/locale -a |grep -q ^en_US.iso88591$',
               'path'    => '/bin:/usr/bin:/sbin:/usr/sbin',
             })
           }
