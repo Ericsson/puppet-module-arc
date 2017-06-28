@@ -86,9 +86,9 @@ class arc (
       }
       $symlink_target_default     = undef
     }
-    /^(Ubuntu-12.04|Ubuntu-14.04)/: {
+    /^(Ubuntu-12|Ubuntu-14|Ubuntu-16)/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386' ]
+      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386', 'tcl-dev' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
@@ -229,7 +229,7 @@ class arc (
 
     exec { 'locale-gen':
       command => '/usr/sbin/locale-gen en_US',
-      unless  => 'grep ^en_US\ ISO-8859-1$ /var/lib/locales/supported.d/local',
+      unless  => '/usr/bin/locale -a |grep -q ^en_US.iso88591$',
       path    => '/bin:/usr/bin:/sbin:/usr/sbin',
     }
   }

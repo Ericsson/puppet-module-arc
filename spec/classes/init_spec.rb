@@ -255,7 +255,7 @@ describe 'arc' do
       { :operatingsystem            => 'Ubuntu',
         :operatingsystemrelease     => '12.04',
         :architecture               => 'x86_64',
-        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh' ],
+        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         :rndrelease_version_default => nil,
         :symlink_target_default     => nil,
       },
@@ -263,7 +263,15 @@ describe 'arc' do
       { :operatingsystem            => 'Ubuntu',
         :operatingsystemrelease     => '14.04',
         :architecture               => 'x86_64',
-        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh' ],
+        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
+        :rndrelease_version_default => nil,
+        :symlink_target_default     => nil,
+      },
+    'Ubuntu-16.04 x86_64' =>
+      { :operatingsystem            => 'Ubuntu',
+        :operatingsystemrelease     => '16.04',
+        :architecture               => 'x86_64',
+        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         :rndrelease_version_default => nil,
         :symlink_target_default     => nil,
       },
@@ -326,7 +334,7 @@ describe 'arc' do
           it {
             should contain_exec('locale-gen').with({
               'command' => '/usr/sbin/locale-gen en_US',
-              'unless'  => 'grep ^en_US\ ISO-8859-1$ /var/lib/locales/supported.d/local',
+              'unless'  => '/usr/bin/locale -a |grep -q ^en_US.iso88591$',
               'path'    => '/bin:/usr/bin:/sbin:/usr/sbin',
             })
           }
