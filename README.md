@@ -23,17 +23,22 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
-* 1.4.0 2017-02-20 support Puppet 4.9 and Ruby 2.3.1
-* 1.3.0 2016-02-24 add possibility to manage arc console icon
-* 1.2.2 2015-08-14 drop unneeded 32bit support on RedHat 7
-* 1.2.1 2015-07-31 support for Puppet v4
-* 1.2.0 2015-05-06 add ability to unmanage rndrelease file
-* 1.1.1 2015-03-24 manage tcsh package as dependency
-* 1.1.0 2015-02-24 add Ubuntu support for 12.04/14.04
-* 1.0.1 2015-02-16 prepare for Puppet v4
+* 1.5.0 2017-06-28
+  * Add support for Ubuntu 16
+  * Enhance unless condition for locale-gen exec resource
+  * Add tcl-dev for Ubuntu flavours
+* 1.4.0 2017-02-20 Support Puppet 4.9 and Ruby 2.3.1
+* 1.3.0 2016-02-24 Add possibility to manage arc console icon
+* 1.2.2 2015-08-14 Drop unneeded 32bit support on RedHat 7
+* 1.2.1 2015-07-31 Support for Puppet v4
+* 1.2.0 2015-05-06 Add ability to unmanage rndrelease file
+* 1.1.1 2015-03-24 Manage tcsh package as dependency
+* 1.1.0 2015-02-24 Add Ubuntu support for 12.04/14.04
+* 1.0.1 2015-02-16
+  * Prepare for Puppet v4
   * deprecate type() as preparation for Puppet v4
   * Requires stdlib >= 4.2 now
-* 1.0.0 2014-11-13 initial release
+* 1.0.0 2014-11-13 Initial release
 
 
 # Parameters #
