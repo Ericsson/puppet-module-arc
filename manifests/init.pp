@@ -35,7 +35,7 @@ class arc (
     }
     /^(RedHat|CentOS)-7/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh' ]
+      $packages_default           = [ 'tcsh', 'libX11.i686' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
