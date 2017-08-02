@@ -23,6 +23,7 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+* 1.6.0 2017-08-02 * Add support for CentOS family
 * 1.5.0 2017-06-28
   * Add support for Ubuntu 16
   * Enhance unless condition for locale-gen exec resource
