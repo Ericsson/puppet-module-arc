@@ -14,7 +14,7 @@ This module has been tested to work on the following systems with Puppet v3
 
 This module provides OS default values for these OSfamilies:
 
- * RedHat 5/6/7
+ * RedHat/CentOS 5/6/7
  * Solaris 9/10
  * Suse 10/11/12
  * Ubuntu 12.04/14.04

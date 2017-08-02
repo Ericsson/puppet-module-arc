@@ -21,21 +21,21 @@ class arc (
   # Set $os_defaults_missing to true for unspecified osfamilies
 
   case "${::operatingsystem}-${::operatingsystemrelease}" {
-    /^RedHat-5/: {
+    /^(RedHat|CentOS)-5/: {
       $os_defaults_missing        = false
       $packages_default           = [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh'  ]
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
-    /^RedHat-6/: {
+    /^(RedHat|CentOS)-6/: {
       $os_defaults_missing        = false
       $packages_default           = [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
-    /^RedHat-7/: {
+    /^(RedHat|CentOS)-7/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh' ]
+      $packages_default           = [ 'tcsh', 'libX11.i686' ]
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }

@@ -1,5 +1,5 @@
 {
-  "name": "Phil-Friderici-arc",
+  "name": "PhilFriderici-gnomish",
   "version": "1.5.0",
   "author": "Phil-Friderici",
   "summary": "Manage OpenAFS additions",
@@ -10,6 +10,14 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "5",
         "6",
