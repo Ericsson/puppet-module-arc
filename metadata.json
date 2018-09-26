@@ -1,12 +1,12 @@
 {
-  "name": "PhilFriderici-gnomish",
-  "version": "1.6.0",
-  "author": "Phil-Friderici",
-  "summary": "Manage OpenAFS additions",
+  "name": "kodguru-arc",
+  "version": "1.6.1",
+  "author": "kodguru",
+  "summary": "Manages libtcl symlink and /etc/rndrelease for AFS usage",
   "license": "Apache-2.0",
-  "source": "git@github.com:Phil-Friderici/puppet-module-arc.git",
-  "project_page": "https://github.com/Phil-Friderici/puppet-module-arc",
-  "issues_url": "https://github.com/Phil-Friderici/puppet-module-arc/issues",
+  "source": "git@github.com:kodguru/puppet-module-arc.git",
+  "project_page": "https://github.com/kodguru/puppet-module-arc",
+  "issues_url": "https://github.com/kodguru/puppet-module-arc/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -86,6 +86,6 @@
     }
   ],
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.2.0 < 6.0.0"}
+    {"name":"puppetlabs/stdlib","version_requirement":">= 4.6.0 < 5.0.0"}
   ]
 }
