@@ -299,6 +299,14 @@ describe 'arc' do
         :rndrelease_version_default => nil,
         :symlink_target_default     => nil,
       },
+    'Ubuntu-18.04 x86_64' =>
+      { :operatingsystem            => 'Ubuntu',
+        :operatingsystemrelease     => '18.04',
+        :architecture               => 'x86_64',
+        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
+        :rndrelease_version_default => nil,
+        :symlink_target_default     => nil,
+      },
   }
 
   describe 'with default values for parameters' do
