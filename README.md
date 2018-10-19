@@ -23,6 +23,8 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+* 1.7.0 2018-10-19 * Add support for Ubuntu 18.04
+* 1.6.1 2018-09-26 * Support Puppet 5.x
 * 1.6.0 2017-08-02 * Add support for CentOS family
 * 1.5.0 2017-06-28
   * Add support for Ubuntu 16
