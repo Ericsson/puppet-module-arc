@@ -17,12 +17,13 @@ This module provides OS default values for these OSfamilies:
  * RedHat/CentOS 5/6/7
  * Solaris 9/10
  * Suse 10/11/12
- * Ubuntu 12.04/14.04
+ * Ubuntu 12.04/14.04/16.04/18.04
 
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 
 
 # Version history #
+* 1.7.1 2018-10-24 * Support Puppet 6.x
 * 1.7.0 2018-10-19 * Add support for Ubuntu 18.04
 * 1.6.1 2018-09-26 * Support Puppet 5.x
 * 1.6.0 2017-08-02 * Add support for CentOS family
