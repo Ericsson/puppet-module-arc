@@ -70,7 +70,7 @@ class arc (
       }
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
-    /^(SLED-12|SLES-12)/: {
+    /^(SLED-12|SLES-12|SLED-15|SLES-15)/: {
       $os_defaults_missing        = false
       $packages_default           = [ 'libXmu6-32bit', 'tcl-32bit', 'tcsh' ]
       $rndrelease_version_default = undef
