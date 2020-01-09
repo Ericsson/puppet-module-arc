@@ -23,6 +23,9 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+* 1.8.0 2020-01-09
+  * Add support for Suse 15
+  * Remove ruby 1.8.7 support
 * 1.7.1 2018-10-24 * Support Puppet 6.x
 * 1.7.0 2018-10-19 * Add support for Ubuntu 18.04
 * 1.6.1 2018-09-26 * Support Puppet 5.x
