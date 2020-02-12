@@ -14,7 +14,7 @@ Puppet v4, Puppet v5 and Puppet v6.
 
 This module provides OS default values for these OSfamilies:
 
- * RedHat/CentOS 5/6/7
+ * RedHat/CentOS 5/6/7/8
  * Solaris 9/10
  * Suse 10/11/12/15
  * Ubuntu 12.04/14.04/16.04/18.04
@@ -23,6 +23,8 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+* 1.9.0 2020-02-12
+  * Add support for Red Hat 8
 * 1.8.0 2020-01-09
   * Add support for Suse 15
   * Remove ruby 1.8.7 support
