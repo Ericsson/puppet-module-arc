@@ -39,6 +39,12 @@ class arc (
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
+    /^(RedHat|CentOS)-8/: {
+      $os_defaults_missing        = false
+      $packages_default           = [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686' ]
+      $rndrelease_version_default = undef
+      $symlink_target_default     = undef
+    }
     /^(SLED-10|SLES-10)/: {
       $os_defaults_missing        = false
       $packages_default           = $::architecture ? {
