@@ -17,7 +17,7 @@ This module provides OS default values for these OSfamilies:
  * RedHat/CentOS 5/6/7/8
  * Solaris 9/10
  * Suse 10/11/12/15
- * Ubuntu 12.04/14.04/16.04/18.04
+ * Ubuntu 12.04/14.04/16.04/18.04/20.04
 
 For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
 
