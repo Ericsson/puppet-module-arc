@@ -23,6 +23,8 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
 
 
 # Version history #
+* 1.10.0 2020-10-16
+  * Add support for Ubuntu 20.04
 * 1.9.0 2020-02-12
   * Add support for Red Hat 8
 * 1.8.0 2020-01-09
