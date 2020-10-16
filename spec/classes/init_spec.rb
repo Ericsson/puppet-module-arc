@@ -339,6 +339,14 @@ describe 'arc' do
         :rndrelease_version_default => nil,
         :symlink_target_default     => nil,
       },
+    'Ubuntu-20.04 x86_64' =>
+      { :operatingsystem            => 'Ubuntu',
+        :operatingsystemrelease     => '20.04',
+        :architecture               => 'x86_64',
+        :package_name_default       => [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
+        :rndrelease_version_default => nil,
+        :symlink_target_default     => nil,
+      },
   }
 
   describe 'with default values for parameters' do
@@ -388,13 +396,16 @@ describe 'arc' do
 
         # Ubuntu specific special specialities
         if v[:operatingsystem] == 'Ubuntu'
-          it {
-            should contain_file('awk_symlink').with({
-              'ensure' => 'link',
-              'path'   => '/bin/awk',
-              'target' => '/usr/bin/awk',
-            })
-          }
+          if v[:operatingsystemrelease] =~ /^(10|12|14|16|18)/
+            it {
+              should contain_file('awk_symlink').with({
+                'ensure' => 'link',
+                'path'   => '/bin/awk',
+                'target' => '/usr/bin/awk',
+              })
+            }
+          end
+
           it {
             should contain_exec('locale-gen').with({
               'command' => '/usr/sbin/locale-gen en_US',
