@@ -633,7 +633,7 @@ describe 'arc' do
         name:    ['arc_console_icon', 'create_rndrelease', 'create_symlink', 'install_package', 'manage_arc_console_icon', 'manage_rndrelease'],
         valid:   [true, false, 'true', 'false'],
         invalid: ['string', ['array'], { 'ha' => 'sh' }, 3, 2.42, nil],
-        message: '(Unknown type of boolean|str2bool\(\): Requires either string to work with)',
+        message: 'str2bool\(\): (Unknown type of boolean given|Requires string to work with)',
       },
     }
 
