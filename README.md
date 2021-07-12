@@ -8,9 +8,9 @@ puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
 
 # Compatability #
 
-This module has been tested to work on the following systems with Puppet v3
-(with and without the future parser) and ruby versions 1.9.3, 2.0.0 and 2.1.9,
-Puppet v4, Puppet v5 and Puppet v6.
+This module has been tested to work on the following systems with Puppet
+versions 5, 6 and 7 with the Ruby version associated with those releases.
+This module aims to support the current and previous major Puppet versions.
 
 This module provides OS default values for these OSfamilies:
 

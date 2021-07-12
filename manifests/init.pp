@@ -149,7 +149,7 @@ class arc (
     ($rndrelease_version == 'USE_DEFAULTS' and $create_rndrelease_real != true) or
     ($symlink_target     == 'USE_DEFAULTS' and $create_symlink_real    != true)
   ) and $os_defaults_missing == true {
-      fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.")
+      fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.") #lint:ignore:140chars
   }
   # </USE_DEFAULTS vs OS defaults>
 
