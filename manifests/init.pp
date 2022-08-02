@@ -82,16 +82,6 @@ class arc (
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.6.so'
     }
-    /^Solaris/: {
-      $os_defaults_missing        = false
-      $packages_default           = undef
-      $rndrelease_version_default = $::kernelrelease ? {
-        '5.9'  => 'UMWP 2.0',
-        '5.10' => 'UMWP 3.0',
-        default => undef,
-      }
-      $symlink_target_default     = undef
-    }
     /^(Ubuntu-12|Ubuntu-14|Ubuntu-16|Ubuntu-18|Ubuntu-20)/: {
       $os_defaults_missing        = false
       $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386', 'tcl-dev' ]

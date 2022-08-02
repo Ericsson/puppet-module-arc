@@ -324,26 +324,6 @@ describe 'arc' do
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.6.so',
       },
-    'Solaris 9' =>
-      {
-        operatingsystem:            'Solaris',
-        operatingsystemrelease:     '5.9',
-        architecture:               'sun4u',
-        package_name_default:       nil,
-        rndrelease_version_default: 'UMWP 2.0',
-        symlink_target_default:     nil,
-        kernelrelease:              '5.9',
-      },
-    'Solaris 10' =>
-      {
-        operatingsystem:            'Solaris',
-        operatingsystemrelease:     '5.10',
-        architecture:               'sun4u',
-        package_name_default:       nil,
-        rndrelease_version_default: 'UMWP 3.0',
-        symlink_target_default:     nil,
-        kernelrelease:              '5.10',
-      },
     'Ubuntu-12.04 x86_64' =>
       {
         operatingsystem:            'Ubuntu',
@@ -476,40 +456,6 @@ describe 'arc' do
           it { is_expected.to contain_package(package).with_ensure('present') }
         end
       end
-    end
-  end
-
-  describe 'with Solaris specific package attributes' do
-    let :facts do
-      {
-        operatingsystem:        'Solaris',
-        kernelrelease:          '5.10',
-        operatingsystemrelease: nil,
-      }
-    end
-    let :params do
-      {
-        packages:          [ 'tcl-devel-solaris', 'libXmu-solaris' ],
-        package_adminfile: '/sw/Solaris/Sparc/noask',
-        package_provider:  'sun',
-        package_source:    '/sw/Solaris/Sparc/arc',
-      }
-    end
-
-    it { is_expected.to compile.with_all_deps }
-
-    # package { '$packages_real': }
-    [ 'tcl-devel-solaris', 'libXmu-solaris' ].each do |package|
-      it {
-        is_expected.to contain_package(package).with(
-          {
-            'ensure'    => 'present',
-            'adminfile' => '/sw/Solaris/Sparc/noask',
-            'provider'  => 'sun',
-            'source'    => '/sw/Solaris/Sparc/arc',
-          },
-        )
-      }
     end
   end
 
