@@ -119,50 +119,12 @@ class arc (
   }
   # </define os default values>
 
-  # <convert stringified booleans>
-  if is_bool($create_rndrelease) == true {
-    $create_rndrelease_real = $create_rndrelease
-  } else {
-    $create_rndrelease_real = str2bool($create_rndrelease)
-  }
-
-  if is_bool($manage_rndrelease) == true {
-    $manage_rndrelease_real = $manage_rndrelease
-  } else {
-    $manage_rndrelease_real = str2bool($manage_rndrelease)
-  }
-
-  if is_bool($create_symlink) == true {
-    $create_symlink_real = $create_symlink
-  } else {
-    $create_symlink_real = str2bool($create_symlink)
-  }
-
-  if is_bool($install_package) == true {
-    $install_package_real = $install_package
-  } else {
-    $install_package_real = str2bool($install_package)
-  }
-
-  if is_bool($arc_console_icon) == true {
-    $arc_console_icon_real = $arc_console_icon
-  } else {
-    $arc_console_icon_real = str2bool($arc_console_icon)
-  }
-
-  if is_bool($manage_arc_console_icon) == true {
-    $manage_arc_console_icon_real = $manage_arc_console_icon
-  } else {
-    $manage_arc_console_icon_real = str2bool($manage_arc_console_icon)
-  }
-  # </convert stringified booleans>
-
   # <USE_DEFAULTS vs OS defaults>
   # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
   if (
-    ($packages           == 'USE_DEFAULTS' and $install_package_real   != true) or
-    ($rndrelease_version == 'USE_DEFAULTS' and $create_rndrelease_real != true) or
-    ($symlink_target     == 'USE_DEFAULTS' and $create_symlink_real    != true)
+    ($packages           == 'USE_DEFAULTS' and $install_package   != true) or
+    ($rndrelease_version == 'USE_DEFAULTS' and $create_rndrelease != true) or
+    ($symlink_target     == 'USE_DEFAULTS' and $create_symlink    != true)
   ) and $os_defaults_missing == true {
     fail("Sorry, I don't know default values for ${facts['os']['name']}-${facts['os']['release']['full']} yet :( Please provide specific values to the arc module.") #lint:ignore:140chars
   }
@@ -186,38 +148,16 @@ class arc (
     'USE_DEFAULTS' => $symlink_target_default,
     default        => $symlink_target
   }
-
   # </assign variables>
 
-  # <validating variables>
-
-  validate_bool($create_rndrelease_real)
-  validate_bool($manage_rndrelease_real)
-  validate_bool($create_symlink_real)
-  validate_bool($install_package_real)
-  validate_bool($arc_console_icon_real)
-  validate_bool($manage_arc_console_icon_real)
-
-  if $packages_real != undef {
-    validate_array($packages_real)
-  }
-
-  validate_string($rndrelease_version_real)
-
-  if $symlink_target_real != undef {
-    validate_absolute_path($symlink_target_real)
-  }
-
-  # </validating variables>
-
   # <Do Stuff>
-  if ($create_rndrelease_real == false or $rndrelease_version_real == undef) {
+  if ($create_rndrelease == false or $rndrelease_version_real == undef) {
     $rndrelease_ensure = 'absent'
   } else {
     $rndrelease_ensure = 'present'
   }
 
-  if $manage_rndrelease_real == true {
+  if $manage_rndrelease == true {
     file { 'arc_rndrelease':
       ensure  => $rndrelease_ensure,
       path    => '/etc/rndrelease',
@@ -243,7 +183,7 @@ class arc (
     }
   }
 
-  if ($create_symlink_real == true and $symlink_target_real != undef) {
+  if ($create_symlink == true and $symlink_target_real != undef) {
     file { 'arc_symlink':
       ensure => link,
       path   => '/usr/lib/libtcl.so.0',
@@ -251,14 +191,14 @@ class arc (
     }
   }
 
-  if $install_package_real == true and $packages_real != undef {
+  if $install_package == true and $packages_real != undef {
     package { $packages_real:
       ensure => present,
     }
   }
 
-  if $manage_arc_console_icon_real == true {
-    if $arc_console_icon_real == true {
+  if $manage_arc_console_icon == true {
+    if $arc_console_icon == true {
       file { 'arc_console.desktop':
         ensure => file,
         path   => '/usr/share/applications/arc_console.desktop',
