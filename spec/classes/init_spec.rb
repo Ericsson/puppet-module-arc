@@ -2,384 +2,550 @@ require 'spec_helper'
 describe 'arc' do
   let :facts do
     {
-      operatingsystem:        'RedHat',
-      operatingsystemrelease: '7',
-      architecture:           'x86_64',
+      os: {
+        name: 'RedHat',
+        release: {
+          full: '7',
+        }
+      }
     }
   end
 
   platforms = {
     'RedHat-5 x86_64' =>
       {
-        operatingsystem:            'RedHat',
-        operatingsystemrelease:     '5',
-        architecture:               'x86_64',
         package_name_default:       [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'RedHat',
+          release: {
+            full: '5.0',
+          }
+        }
       },
     'RedHat-6 x86_64' =>
       {
-        operatingsystem:            'RedHat',
-        operatingsystemrelease:     '6',
-        architecture:               'x86_64',
         package_name_default:       [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'RedHat',
+          release: {
+            full: '6.0',
+          }
+        }
       },
     'RedHat-7 x86_64' =>
       {
-        operatingsystem:            'RedHat',
-        operatingsystemrelease:     '7',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcsh', 'libX11.i686' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'RedHat',
+          release: {
+            full: '7.0',
+          }
+        }
       },
     'RedHat-8 x86_64' =>
       {
-        operatingsystem:            'RedHat',
-        operatingsystemrelease:     '8',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'RedHat',
+          release: {
+            full: '8.0',
+          }
+        }
       },
     'CentOS-5 x86_64' =>
       {
-        operatingsystem:            'CentOS',
-        operatingsystemrelease:     '5',
-        architecture:               'x86_64',
         package_name_default:       [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'CentOS',
+          release: {
+            full: '5.0',
+          }
+        }
       },
     'CentOS-6 x86_64' =>
       {
-        operatingsystem:            'CentOS',
-        operatingsystemrelease:     '6',
-        architecture:               'x86_64',
         package_name_default:       [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'CentOS',
+          release: {
+            full: '6.0',
+          }
+        }
       },
     'CentOS-7 x86_64' =>
       {
-        operatingsystem:            'CentOS',
-        operatingsystemrelease:     '7',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcsh', 'libX11.i686' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'CentOS',
+          release: {
+            full: '7.0',
+          }
+        }
       },
     'CentOS-8 x86_64' =>
       {
-        operatingsystem:            'CentOS',
-        operatingsystemrelease:     '8',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'CentOS',
+          release: {
+            full: '8.0',
+          }
+        }
       },
     'SLED-10.0 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.0',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.0',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '10.0',
+          }
+        }
       },
     'SLES-10.0 i386' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '10.0',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.0',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLES',
+          release: {
+            full: '10.0',
+          }
+        }
       },
     'SLED-10.0 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.0',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '10.0',
+          }
+        }
       },
     'SLES-10.0 x86_64' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '10.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.0',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLES',
+          release: {
+            full: '10.0',
+          }
+        }
       },
     'SLED-10.1 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.1',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.1',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '10.1',
+          }
+        }
       },
     'SLED-10.1 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.1',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.1',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '10.1',
+          }
+        }
       },
     'SLED-10.2 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.2',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.2',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '10.2',
+          }
+        }
       },
     'SLED-10.2 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.2',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.2',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '10.2',
+          }
+        }
       },
     'SLED-10.3 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.3',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.3',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '10.3',
+          }
+        }
       },
     'SLED-10.3 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.3',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.3',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '10.3',
+          }
+        }
       },
     'SLED-10.4 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.4',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.4',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '10.4',
+          }
+        }
       },
     'SLED-10.4 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '10.4',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh' ],
         rndrelease_version_default: 'LMWP 2.4',
         symlink_target_default:     '/usr/lib/libtcl8.4.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '10.4',
+          }
+        }
       },
     'SLED-11.0 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.0',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
         rndrelease_version_default: 'LMWP 3.0',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '11.0',
+          }
+        }
       },
     'SLES-11.0 i386' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '11.0',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
         rndrelease_version_default: 'LMWP 3.0',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLES',
+          release: {
+            full: '11.0',
+          }
+        }
       },
     'SLED-11.0 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: 'LMWP 3.0',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '11.0',
+          }
+        }
       },
     'SLES-11.0 x86_64' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '11.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: 'LMWP 3.0',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLES',
+          release: {
+            full: '11.0',
+          }
+        }
       },
     'SLED-11.1 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.1',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
         rndrelease_version_default: 'LMWP 3.1',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '11.1',
+          }
+        }
       },
     'SLED-11.1 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.1',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: 'LMWP 3.1',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '11.1',
+          }
+        }
       },
     'SLED-11.2 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.2',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
         rndrelease_version_default: 'LMWP 3.2',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '11.2',
+          }
+        }
       },
     'SLED-11.2 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.2',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: 'LMWP 3.2',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '11.2',
+          }
+        }
       },
     'SLED-11.3 i386' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.3',
-        architecture:               'i386',
         package_name_default:       [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
         rndrelease_version_default: 'LMWP 3.3',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'i386',
+          name: 'SLED',
+          release: {
+            full: '11.3',
+          }
+        }
       },
     'SLED-11.3 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.3',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: 'LMWP 3.3',
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '11.3',
+          }
+        }
       },
     'SLED-11.4 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '11.4',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.5.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '11.4',
+          }
+        }
       },
       'SLES-12.0 x86_64' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '12.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'libXmu6-32bit' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.6.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLES',
+          release: {
+            full: '12.0',
+          }
+        }
       },
       'SLED-12.0 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '12.0',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'libXmu6-32bit' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.6.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '12.0',
+          }
+        }
       },
       'SLES-15.1 x86_64' =>
       {
-        operatingsystem:            'SLES',
-        operatingsystemrelease:     '15.1',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'libXmu6-32bit' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.6.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLES',
+          release: {
+            full: '15.1',
+          }
+        }
       },
       'SLED-15.1 x86_64' =>
       {
-        operatingsystem:            'SLED',
-        operatingsystemrelease:     '15.1',
-        architecture:               'x86_64',
         package_name_default:       [ 'tcl-32bit', 'tcsh', 'libXmu6-32bit' ],
         rndrelease_version_default: nil,
         symlink_target_default:     '/usr/lib/libtcl8.6.so',
+        os: {
+          architecture: 'x86_64',
+          name: 'SLED',
+          release: {
+            full: '15.1',
+          }
+        }
       },
     'Ubuntu-12.04 x86_64' =>
       {
-        operatingsystem:            'Ubuntu',
-        operatingsystemrelease:     '12.04',
-        architecture:               'x86_64',
         package_name_default:       [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'Ubuntu',
+          release: {
+            full: '12.04',
+          }
+        }
       },
     'Ubuntu-14.04 x86_64' =>
       {
-        operatingsystem:            'Ubuntu',
-        operatingsystemrelease:     '14.04',
-        architecture:               'x86_64',
         package_name_default:       [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'Ubuntu',
+          release: {
+            full: '14.04',
+          }
+        }
       },
     'Ubuntu-16.04 x86_64' =>
       {
-        operatingsystem:            'Ubuntu',
-        operatingsystemrelease:     '16.04',
-        architecture:               'x86_64',
         package_name_default:       [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'Ubuntu',
+          release: {
+            full: '16.04',
+          }
+        }
       },
     'Ubuntu-18.04 x86_64' =>
       {
-        operatingsystem:            'Ubuntu',
-        operatingsystemrelease:     '18.04',
-        architecture:               'x86_64',
         package_name_default:       [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'Ubuntu',
+          release: {
+            full: '18.04',
+          }
+        }
       },
     'Ubuntu-20.04 x86_64' =>
       {
-        operatingsystem:            'Ubuntu',
-        operatingsystemrelease:     '20.04',
-        architecture:               'x86_64',
         package_name_default:       [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ],
         rndrelease_version_default: nil,
         symlink_target_default:     nil,
+        os: {
+          architecture: 'x86_64',
+          name: 'Ubuntu',
+          release: {
+            full: '20.04',
+          }
+        }
       },
   }
 
   describe 'with default values for parameters' do
     platforms.sort.each do |_k, v|
-      context "where operatingsystem is <#{v[:operatingsystem]}-#{v[:operatingsystemrelease]}> on <#{v[:architecture]}>" do
+      context "where [os][name] is <#{v[:os][:name]}-#{v[:os][:release][:full]}> on <#{v[:os][:architecture]}>" do
         let :facts do
           {
-            operatingsystem:        v[:operatingsystem],
-            operatingsystemrelease: v[:operatingsystemrelease],
-            architecture:           v[:architecture],
-            kernelrelease:          v[:kernelrelease],
+            os: {
+              architecture:         v[:os][:architecture],
+              name:                 v[:os][:name],
+              release: {
+                full:               v[:os][:release][:full],
+              }
+            }
           }
         end
 
@@ -424,8 +590,8 @@ describe 'arc' do
         end
 
         # Ubuntu specific special specialities
-        if v[:operatingsystem] == 'Ubuntu'
-          if v[:operatingsystemrelease].match?(%r{^(10|12|14|16|18)})
+        if v[:os][:name] == 'Ubuntu'
+          if v[:os][:release][:full].match?(%r{^(10|12|14|16|18)})
             it {
               is_expected.to contain_file('awk_symlink').with(
                 {
@@ -554,6 +720,12 @@ describe 'arc' do
       {
         operatingsystem:        'RedHat',
         operatingsystemrelease: '7',
+        os: {
+          name: 'RedHat',
+          release: {
+            full: '7.0',
+          }
+        }
       }
     end
     let(:mandatory_params) do
@@ -565,21 +737,21 @@ describe 'arc' do
     validations = {
       'absolute_path' => {
         name:    ['symlink_target'],
-        valid:   ['/absolute/filepath', '/absolute/directory/', ['/array', '/with/paths']],
-        invalid: ['../invalid', 3, 2.42, ['array'], { 'ha' => 'sh' }, true, false, nil],
-        message: 'is not an absolute path',
+        valid:   ['/absolute/filepath', '/absolute/directory/'],
+        invalid: [['/array', '/with/paths'], '../invalid', 3, 2.42, ['array'], { 'ha' => 'sh' }, true, false, nil],
+        message: 'expects a match for Variant\[Enum\[\'USE_DEFAULTS\'\], Stdlib::Absolutepath',
       },
       'array' => {
         name:    ['packages'],
         valid:   [['ar', 'ray']],
         invalid: ['string', { 'ha' => 'sh' }, 3, 2.42, true, false, nil],
-        message: 'is not an Array',
+        message: 'expects a match for Variant\[Enum\[\'USE_DEFAULTS\'\], Array\[String\[1\]',
       },
-      'bool_stringified' => {
+      'bool' => {
         name:    ['arc_console_icon', 'create_rndrelease', 'create_symlink', 'install_package', 'manage_arc_console_icon', 'manage_rndrelease'],
-        valid:   [true, false, 'true', 'false'],
-        invalid: ['string', ['array'], { 'ha' => 'sh' }, 3, 2.42, nil],
-        message: 'str2bool\(\): (Unknown type of boolean given|Requires string to work with)',
+        valid:   [true, false],
+        invalid: ['true', 'string', ['array'], { 'ha' => 'sh' }, 3, 2.42, nil],
+        message: 'expects a Boolean value',
       },
     }
 

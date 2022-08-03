@@ -1,57 +1,82 @@
-# == Class: arc
+# @summary Manages tcl-devel package, libtcl symlink and /etc/rndrelease.
 #
-# Manages tcl-devel package, libtcl symlink and /etc/rndrelease.
-
+# This module requires that you have OpenAFS installed. It is intended to be used in cooperation with
+# puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
+#
+# @param manage_rndrelease
+#   Boolean to trigger management of /etc/rndrelease file.
+#
+# @param create_rndrelease
+#   Boolean to trigger creation of /etc/rndrelease file.
+#
+# @param create_symlink
+#   Boolean to trigger creation of libtcl symlink.
+#
+# @param install_package
+#   Boolean to trigger installation of packages.
+#
+# @param packages
+#   Array with package names to be installed.
+#
+# @param rndrelease_version
+#   String containing the content for /etc/rndrelease.
+#   If set to undef /etc/rndrelease will be deleted.
+#
+# @param symlink_target
+#   Absolute path to the target of the libtcl symlink.
+#
+# @param manage_arc_console_icon
+#   Boolean to trigger if arc_console.desktop should be managed.
+#
+# @param arc_console_icon
+#   Boolean to trigger creation (true) or deletion (false) of arc_console.desktop for the the arc_console.
+#
 class arc (
-  $manage_rndrelease       = true,
-  $create_rndrelease       = true,
-  $create_symlink          = true,
-  $install_package         = true,
-  $package_adminfile       = undef,
-  $packages                = 'USE_DEFAULTS',
-  $package_provider        = undef,
-  $package_source          = undef,
-  $rndrelease_version      = 'USE_DEFAULTS',
-  $symlink_target          = 'USE_DEFAULTS',
-  $manage_arc_console_icon = false,
-  $arc_console_icon        = false,
+  Boolean $manage_rndrelease = true,
+  Boolean $create_rndrelease = true,
+  Boolean $create_symlink = true,
+  Boolean $install_package = true,
+  Variant[Enum['USE_DEFAULTS'], Array[String[1]]] $packages = 'USE_DEFAULTS',
+  String[1] $rndrelease_version = 'USE_DEFAULTS',
+  Variant[Enum['USE_DEFAULTS'], Stdlib::Absolutepath] $symlink_target = 'USE_DEFAULTS',
+  Boolean $manage_arc_console_icon = false,
+  Boolean $arc_console_icon = false,
 ) {
-
   # <define os default values>
   # Set $os_defaults_missing to true for unspecified osfamilies
 
-  case "${::operatingsystem}-${::operatingsystemrelease}" {
+  case "${facts['os']['name']}-${facts['os']['release']['full']}" {
     /^(RedHat|CentOS)-5/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh'  ]
+      $packages_default           = ['libXmu.i386', 'tcl-devel.i386', 'tcsh']
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.4.so'
     }
     /^(RedHat|CentOS)-6/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ]
+      $packages_default           = ['libXmu.i686', 'tcl-devel.i686', 'tcsh']
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.5.so'
     }
     /^(RedHat|CentOS)-7/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh', 'libX11.i686' ]
+      $packages_default           = ['tcsh', 'libX11.i686']
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
     /^(RedHat|CentOS)-8/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686' ]
+      $packages_default           = ['tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686']
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
     /^(SLED-10|SLES-10)/: {
       $os_defaults_missing        = false
-      $packages_default           = $::architecture ? {
-        'x86_64' => [ 'tcl-32bit', 'tcsh' ],
-        default  => [ 'tcl', 'tcsh' ],
+      $packages_default           = $facts['os']['architecture'] ? {
+        'x86_64' => ['tcl-32bit', 'tcsh'],
+        default  => ['tcl', 'tcsh'],
       }
-      $rndrelease_version_default = $::operatingsystemrelease ? {
+      $rndrelease_version_default = $facts['os']['release']['full'] ? {
         '10.0'  => 'LMWP 2.0',
         '10.1'  => 'LMWP 2.1',
         '10.2'  => 'LMWP 2.2',
@@ -63,11 +88,11 @@ class arc (
     }
     /^(SLED-11|SLES-11)/: {
       $os_defaults_missing        = false
-      $packages_default           = $::architecture ? {
-        'x86_64' => [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ],
-        default  => [ 'tcl', 'tcsh', 'xorg-x11-libXmu' ],
+      $packages_default           = $facts['os']['architecture'] ? {
+        'x86_64' => ['tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit'],
+        default  => ['tcl', 'tcsh', 'xorg-x11-libXmu'],
       }
-      $rndrelease_version_default = $::operatingsystemrelease ? {
+      $rndrelease_version_default = $facts['os']['release']['full'] ? {
         '11.0'  => 'LMWP 3.0',
         '11.1'  => 'LMWP 3.1',
         '11.2'  => 'LMWP 3.2',
@@ -78,13 +103,13 @@ class arc (
     }
     /^(SLED-12|SLES-12|SLED-15|SLES-15)/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'libXmu6-32bit', 'tcl-32bit', 'tcsh' ]
+      $packages_default           = ['libXmu6-32bit', 'tcl-32bit', 'tcsh']
       $rndrelease_version_default = undef
       $symlink_target_default     = '/usr/lib/libtcl8.6.so'
     }
     /^(Ubuntu-12|Ubuntu-14|Ubuntu-16|Ubuntu-18|Ubuntu-20)/: {
       $os_defaults_missing        = false
-      $packages_default           = [ 'tcsh', 'libx11-6:i386', 'libc6:i386', 'tcl-dev' ]
+      $packages_default           = ['tcsh', 'libx11-6:i386', 'libc6:i386', 'tcl-dev']
       $rndrelease_version_default = undef
       $symlink_target_default     = undef
     }
@@ -139,7 +164,7 @@ class arc (
     ($rndrelease_version == 'USE_DEFAULTS' and $create_rndrelease_real != true) or
     ($symlink_target     == 'USE_DEFAULTS' and $create_symlink_real    != true)
   ) and $os_defaults_missing == true {
-      fail("Sorry, I don't know default values for ${::operatingsystem}-${::operatingsystemrelease} yet :( Please provide specific values to the arc module.") #lint:ignore:140chars
+    fail("Sorry, I don't know default values for ${facts['os']['name']}-${facts['os']['release']['full']} yet :( Please provide specific values to the arc module.") #lint:ignore:140chars
   }
   # </USE_DEFAULTS vs OS defaults>
 
@@ -147,15 +172,10 @@ class arc (
   # Change 'USE_DEFAULTS' to OS specific default values
   # Convert strings with booleans to real boolean, if needed
 
-  $package_adminfile_real = $package_adminfile
-
   $packages_real = $packages ? {
     'USE_DEFAULTS' => $packages_default,
     default        => $packages
   }
-
-  $package_provider_real = $package_provider
-  $package_source_real   = $package_source
 
   $rndrelease_version_real = $rndrelease_version ? {
     'USE_DEFAULTS' => $rndrelease_version_default,
@@ -178,16 +198,8 @@ class arc (
   validate_bool($arc_console_icon_real)
   validate_bool($manage_arc_console_icon_real)
 
-  if $package_adminfile_real != undef {
-    validate_string($package_adminfile_real)
-  }
-
   if $packages_real != undef {
     validate_array($packages_real)
-  }
-
-  if $package_source_real != undef {
-    validate_string($package_source_real)
   }
 
   validate_string($rndrelease_version_real)
@@ -198,9 +210,7 @@ class arc (
 
   # </validating variables>
 
-
   # <Do Stuff>
-
   if ($create_rndrelease_real == false or $rndrelease_version_real == undef) {
     $rndrelease_ensure = 'absent'
   } else {
@@ -216,9 +226,9 @@ class arc (
     }
   }
 
-  if $::operatingsystem == 'Ubuntu' {
+  if $facts['os']['name'] == 'Ubuntu' {
     # In 20.xx and later /bin is a symlink to usr/bin
-    if $::operatingsystemrelease =~ /^(10|12|14|16|18)/ {
+    if $facts['os']['release']['full'] =~ /^(10|12|14|16|18)/ {
       file { 'awk_symlink':
         ensure => link,
         path   => '/bin/awk',
@@ -238,24 +248,6 @@ class arc (
       ensure => link,
       path   => '/usr/lib/libtcl.so.0',
       target => $symlink_target_real,
-    }
-  }
-
-  if $package_adminfile_real != undef {
-    Package {
-      adminfile => $package_adminfile_real,
-    }
-  }
-
-  if $package_provider_real != undef {
-    Package {
-      provider => $package_provider_real,
-    }
-  }
-
-  if $package_source_real != undef {
-    Package {
-      source => $package_source_real,
     }
   }
 
@@ -283,5 +275,4 @@ class arc (
     }
   }
   # </Stuff done>
-
 }
