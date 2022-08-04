@@ -1,0 +1,7 @@
+---
+# SLES/SLED 10.2 i386 defaults in alphabetical order per class
+arc::packages:
+  - 'tcl'
+  - 'tcsh'
+arc::rndrelease_version: 'LMWP 2.2'
+arc::symlink_target: '/usr/lib/libtcl8.4.so'

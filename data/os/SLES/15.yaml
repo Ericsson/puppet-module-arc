@@ -1,0 +1,7 @@
+---
+# SLES/SLED 15.x defaults in alphabetical order per class
+arc::packages:
+  - 'libXmu6-32bit'
+  - 'tcl-32bit'
+  - 'tcsh'
+arc::symlink_target: '/usr/lib/libtcl8.6.so'
