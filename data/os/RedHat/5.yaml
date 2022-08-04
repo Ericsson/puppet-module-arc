@@ -1,0 +1,7 @@
+---
+# RedHat/CentOS 5 defaults in alphabetical order per class
+arc::packages:
+  - 'libXmu.i386'
+  - 'tcl-devel.i386'
+  - 'tcsh'
+arc::symlink_target: '/usr/lib/libtcl8.4.so'

@@ -5,7 +5,7 @@ describe 'arc' do
       os: {
         name: 'RedHat',
         release: {
-          full: '7',
+          full: '7.0',
         }
       }
     }
@@ -22,6 +22,7 @@ describe 'arc' do
           name: 'RedHat',
           release: {
             full: '5.0',
+            major: '5',
           }
         }
       },
@@ -35,6 +36,7 @@ describe 'arc' do
           name: 'RedHat',
           release: {
             full: '6.0',
+            major: '6',
           }
         }
       },
@@ -48,6 +50,7 @@ describe 'arc' do
           name: 'RedHat',
           release: {
             full: '7.0',
+            major: '7',
           }
         }
       },
@@ -61,6 +64,7 @@ describe 'arc' do
           name: 'RedHat',
           release: {
             full: '8.0',
+            major: '8',
           }
         }
       },
@@ -74,6 +78,7 @@ describe 'arc' do
           name: 'CentOS',
           release: {
             full: '5.0',
+            major: '5',
           }
         }
       },
@@ -87,6 +92,7 @@ describe 'arc' do
           name: 'CentOS',
           release: {
             full: '6.0',
+            major: '6',
           }
         }
       },
@@ -100,6 +106,7 @@ describe 'arc' do
           name: 'CentOS',
           release: {
             full: '7.0',
+            major: '7',
           }
         }
       },
@@ -113,6 +120,7 @@ describe 'arc' do
           name: 'CentOS',
           release: {
             full: '8.0',
+            major: '8',
           }
         }
       },
@@ -126,6 +134,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.0',
+            major: '10',
           }
         }
       },
@@ -139,6 +148,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '10.0',
+            major: '10',
           }
         }
       },
@@ -152,6 +162,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.0',
+            major: '10',
           }
         }
       },
@@ -165,6 +176,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '10.0',
+            major: '10',
           }
         }
       },
@@ -178,6 +190,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.1',
+            major: '10',
           }
         }
       },
@@ -191,6 +204,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.1',
+            major: '10',
           }
         }
       },
@@ -204,6 +218,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.2',
+            major: '10',
           }
         }
       },
@@ -217,6 +232,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.2',
+            major: '10',
           }
         }
       },
@@ -230,6 +246,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.3',
+            major: '10',
           }
         }
       },
@@ -243,6 +260,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.3',
+            major: '10',
           }
         }
       },
@@ -256,6 +274,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.4',
+            major: '10',
           }
         }
       },
@@ -269,6 +288,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '10.4',
+            major: '10',
           }
         }
       },
@@ -282,6 +302,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.0',
+            major: '11',
           }
         }
       },
@@ -295,6 +316,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '11.0',
+            major: '11',
           }
         }
       },
@@ -308,6 +330,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.0',
+            major: '11',
           }
         }
       },
@@ -321,6 +344,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '11.0',
+            major: '11',
           }
         }
       },
@@ -334,6 +358,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.1',
+            major: '11',
           }
         }
       },
@@ -347,6 +372,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.1',
+            major: '11',
           }
         }
       },
@@ -360,6 +386,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.2',
+            major: '11',
           }
         }
       },
@@ -373,6 +400,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.2',
+            major: '11',
           }
         }
       },
@@ -386,6 +414,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.3',
+            major: '11',
           }
         }
       },
@@ -399,6 +428,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.3',
+            major: '11',
           }
         }
       },
@@ -412,6 +442,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '11.4',
+            major: '11',
           }
         }
       },
@@ -425,6 +456,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '12.0',
+            major: '12',
           }
         }
       },
@@ -438,6 +470,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '12.0',
+            major: '12',
           }
         }
       },
@@ -451,6 +484,7 @@ describe 'arc' do
           name: 'SLES',
           release: {
             full: '15.1',
+            major: '15',
           }
         }
       },
@@ -464,6 +498,7 @@ describe 'arc' do
           name: 'SLED',
           release: {
             full: '15.1',
+            major: '15',
           }
         }
       },
@@ -477,6 +512,7 @@ describe 'arc' do
           name: 'Ubuntu',
           release: {
             full: '12.04',
+            major: '12.04',
           }
         }
       },
@@ -490,6 +526,7 @@ describe 'arc' do
           name: 'Ubuntu',
           release: {
             full: '14.04',
+            major: '14.04',
           }
         }
       },
@@ -503,6 +540,7 @@ describe 'arc' do
           name: 'Ubuntu',
           release: {
             full: '16.04',
+            major: '16.04',
           }
         }
       },
@@ -516,6 +554,7 @@ describe 'arc' do
           name: 'Ubuntu',
           release: {
             full: '18.04',
+            major: '18.04',
           }
         }
       },
@@ -529,6 +568,7 @@ describe 'arc' do
           name: 'Ubuntu',
           release: {
             full: '20.04',
+            major: '20.04',
           }
         }
       },
@@ -544,6 +584,7 @@ describe 'arc' do
               name:                 v[:os][:name],
               release: {
                 full:               v[:os][:release][:full],
+                major:              v[:os][:release][:major],
               }
             }
           }
@@ -735,19 +776,19 @@ describe 'arc' do
     end
 
     validations = {
-      'absolute_path' => {
+      'Optional[Stdlib::Absolutepath]' => {
         name:    ['symlink_target'],
         valid:   ['/absolute/filepath', '/absolute/directory/'],
         invalid: [['/array', '/with/paths'], '../invalid', 3, 2.42, ['array'], { 'ha' => 'sh' }, true, false, nil],
-        message: 'expects a match for Variant\[Enum\[\'USE_DEFAULTS\'\], Stdlib::Absolutepath',
+        message: 'expects a (match for|match for Stdlib::Absolutepath =|Stdlib::Absolutepath =) Variant\[Stdlib::Windowspath.*Stdlib::Unixpath',
       },
-      'array' => {
+      'Optional[Array[String[1]]]' => {
         name:    ['packages'],
-        valid:   [['ar', 'ray']],
-        invalid: ['string', { 'ha' => 'sh' }, 3, 2.42, true, false, nil],
-        message: 'expects a match for Variant\[Enum\[\'USE_DEFAULTS\'\], Array\[String\[1\]',
+        valid:   [['ar', 'ray'], :undef],
+        invalid: ['string', { 'ha' => 'sh' }, 3, 2.42, true],
+        message: 'Undef or Array|expects a String value|Error while evaluating a Resource Statement',
       },
-      'bool' => {
+      'Boolean' => {
         name:    ['arc_console_icon', 'create_rndrelease', 'create_symlink', 'install_package', 'manage_arc_console_icon', 'manage_rndrelease'],
         valid:   [true, false],
         invalid: ['true', 'string', ['array'], { 'ha' => 'sh' }, 3, 2.42, nil],

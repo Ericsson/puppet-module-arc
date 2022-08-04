@@ -1,0 +1,7 @@
+---
+# RedHat/CentOS 8 defaults in alphabetical order per class
+arc::packages:
+  - 'tcsh'
+  - 'libX11.i686'
+  - 'libxcrypt.i686'
+  - 'libnsl.i686'
