@@ -15,17 +15,17 @@ describe 'arc' do
       let(:facts) { os_facts }
 
       validations = {
+        'Array' => {
+          name:    ['packages'],
+          valid:   [['tcsh', 'libX11.i686']],
+          invalid: ['string', { 'ha' => 'sh' }, 3, 2.42, true, nil],
+          message: 'expects an Array',
+        },
         'Optional[Stdlib::Absolutepath]' => {
           name:    ['symlink_target'],
           valid:   ['/absolute/filepath', '/absolute/directory/'],
           invalid: [['/array', '/with/paths'], '../invalid', 3, 2.42, ['array'], { 'ha' => 'sh' }, true, false, nil],
           message: 'expects a (match for|match for Stdlib::Absolutepath =|Stdlib::Absolutepath =) Variant\[Stdlib::Windowspath.*Stdlib::Unixpath',
-        },
-        'Optional[Array[String[1]]]' => {
-          name:    ['packages'],
-          valid:   [['tcsh', 'libX11.i686'], :undef],
-          invalid: ['string', { 'ha' => 'sh' }, 3, 2.42, true],
-          message: 'Undef or Array|expects a String value|Error while evaluating a Resource Statement',
         },
         'Boolean' => {
           name:    ['arc_console_icon', 'create_rndrelease', 'create_symlink', 'install_package', 'manage_arc_console_icon', 'manage_rndrelease'],
