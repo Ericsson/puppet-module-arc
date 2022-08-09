@@ -1,0 +1,7 @@
+---
+# SLES/SLED 10.4 x86_64 defaults in alphabetical order per class
+arc::packages:
+  - 'tcl-32bit'
+  - 'tcsh'
+arc::rndrelease_version: 'LMWP 2.4'
+arc::symlink_target: '/usr/lib/libtcl8.4.so'
