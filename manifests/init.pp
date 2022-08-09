@@ -83,9 +83,7 @@ class arc (
   }
 
   if $install_package == true {
-    package { $packages:
-      ensure => present,
-    }
+    ensure_packages($packages)
   }
 
   if $manage_arc_console_icon == true {
