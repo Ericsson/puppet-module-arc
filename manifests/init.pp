@@ -36,59 +36,13 @@ class arc (
   Boolean $create_rndrelease = true,
   Boolean $create_symlink = true,
   Boolean $install_package = true,
-  Optional[Array[String[1]]] $packages = undef,
+  Array $packages = [],
   Optional[String[1]] $rndrelease_version = undef,
   Optional[Stdlib::Absolutepath] $symlink_target = undef,
   Boolean $manage_arc_console_icon = false,
   Boolean $arc_console_icon = false,
 ) {
-  # <define os default values>
-  # Set $os_defaults_missing to true for unspecified osfamilies
-
-  case "${facts['os']['name']}-${facts['os']['release']['full']}" {
-    /^(RedHat|CentOS)-5/: {
-      $os_defaults_missing        = false
-    }
-    /^(RedHat|CentOS)-6/: {
-      $os_defaults_missing        = false
-    }
-    /^(RedHat|CentOS)-7/: {
-      $os_defaults_missing        = false
-    }
-    /^(RedHat|CentOS)-8/: {
-      $os_defaults_missing        = false
-    }
-    /^(SLED-10|SLES-10)/: {
-      $os_defaults_missing        = false
-    }
-    /^(SLED-11|SLES-11)/: {
-      $os_defaults_missing        = false
-    }
-    /^(SLED-12|SLES-12|SLED-15|SLES-15)/: {
-      $os_defaults_missing        = false
-    }
-    /^(Ubuntu-12|Ubuntu-14|Ubuntu-16|Ubuntu-18|Ubuntu-20)/: {
-      $os_defaults_missing        = false
-    }
-    default: {
-      $os_defaults_missing = true
-    }
-  }
-  # </define os default values>
-
-  # <USE_DEFAULTS vs OS defaults>
-  # Check if 'USE_DEFAULTS' is used anywhere without having OS default value
-  if (
-    ($packages           == undef and $install_package   != true) or
-    ($rndrelease_version == undef and $create_rndrelease != true) or
-    ($symlink_target     == undef and $create_symlink    != true)
-  ) and $os_defaults_missing == true {
-    fail("Sorry, I don't know default values for ${facts['os']['name']}-${facts['os']['release']['full']} yet :( Please provide specific values to the arc module.") #lint:ignore:140chars
-  }
-  # </USE_DEFAULTS vs OS defaults>
-
-  # <Do Stuff>
-  if ($create_rndrelease == false or $rndrelease_version == undef) {
+  if $create_rndrelease == false or $rndrelease_version == undef {
     $rndrelease_ensure = 'absent'
   } else {
     $rndrelease_ensure = 'present'
@@ -120,7 +74,7 @@ class arc (
     }
   }
 
-  if ($create_symlink == true and $symlink_target != undef) {
+  if $create_symlink == true and $symlink_target != undef {
     file { 'arc_symlink':
       ensure => link,
       path   => '/usr/lib/libtcl.so.0',
@@ -128,10 +82,8 @@ class arc (
     }
   }
 
-  if $install_package == true and $packages != undef {
-    package { $packages:
-      ensure => present,
-    }
+  if $install_package == true {
+    ensure_packages($packages)
   }
 
   if $manage_arc_console_icon == true {
@@ -151,5 +103,4 @@ class arc (
       }
     }
   }
-  # </Stuff done>
 }

@@ -1,4 +1,5 @@
 ---
+# deprecated OS flavour, use at your own risk !!
 # Ubuntu 12.04 defaults in alphabetical order per class
 arc::packages:
   - 'tcsh'
