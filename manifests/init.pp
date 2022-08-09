@@ -36,13 +36,13 @@ class arc (
   Boolean $create_rndrelease = true,
   Boolean $create_symlink = true,
   Boolean $install_package = true,
-  Optional[Array[String[1]]] $packages = undef,
+  Array $packages = [],
   Optional[String[1]] $rndrelease_version = undef,
   Optional[Stdlib::Absolutepath] $symlink_target = undef,
   Boolean $manage_arc_console_icon = false,
   Boolean $arc_console_icon = false,
 ) {
-  if ($create_rndrelease == false or $rndrelease_version == undef) {
+  if $create_rndrelease == false or $rndrelease_version == undef {
     $rndrelease_ensure = 'absent'
   } else {
     $rndrelease_ensure = 'present'
@@ -74,7 +74,7 @@ class arc (
     }
   }
 
-  if ($create_symlink == true and $symlink_target != undef) {
+  if $create_symlink == true and $symlink_target != undef {
     file { 'arc_symlink':
       ensure => link,
       path   => '/usr/lib/libtcl.so.0',
@@ -82,7 +82,7 @@ class arc (
     }
   }
 
-  if $install_package == true and $packages != undef {
+  if $install_package == true {
     package { $packages:
       ensure => present,
     }

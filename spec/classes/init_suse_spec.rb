@@ -288,16 +288,14 @@ describe 'arc' do
           }
         end
 
-        # file { 'arc_rndrelease' :}
-        it {
+        it do
           is_expected.to contain_file('arc_rndrelease').with(
             {
               'content' => "#{v[:rndrelease_version_default]}\n",
             },
           )
-        }
+        end
 
-        # package { '$packages_real': }
         v[:package_name_default]&.each do |package|
           it { is_expected.to contain_package(package).with_ensure('present') }
         end
