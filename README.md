@@ -3,26 +3,35 @@ puppet-module-arc
 
 Puppet Module to manage tcl-devel package, libtcl symlink and /etc/rndrelease.
 
-This module assumes that you have OpenAFS installed. It is ment to be used in cooperation with
-puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
+This module requires that you have OpenAFS installed. It is intended to be used in cooperation with
+ puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
 
 # Compatability #
 
 This module has been tested to work on the following systems with Puppet
-versions 5, 6 and 7 with the Ruby version associated with those releases.
+version 7 with the Ruby version associated with those releases.
 This module aims to support the current and previous major Puppet versions.
 
 This module provides OS default values for these OSfamilies:
 
- * RedHat/CentOS 5/6/7/8
- * Solaris 9/10
- * Suse 10/11/12/15
- * Ubuntu 12.04/14.04/16.04/18.04/20.04
+ * RedHat/CentOS 6/7/8
+ * Suse 11/12/15
+ * Ubuntu 14.04/16.04/18.04/20.04
 
-For other OSfamilies support, please specify all (!) parameters which defaults to 'USE_DEFAULTS'.
+For other OSfamilies support, please specify all (!) parameters which defaults to undef or [].
 
 
 # Version history #
+* 2.0.0 2022-08-09
+  * Update PDK to 2.5.0
+  * Move OS specifc data into hiera
+  * Add support for RedHat 8
+  * Use ensure_packages() to avoid conflicts
+  * Refactor unit tests to use rspec-puppet-facts
+  * Various small refactors
+  * Drop support for historical OS flavours of Ubuntu 12.04, SLED/SLES 10, RedHat 5
+  * Drop support for all 32bit OS flavours
+  * Drop support for Solaris, Scientific and OracleLinux
 * 1.10.0 2020-10-16
   * Add support for Ubuntu 20.04
 * 1.9.0 2020-02-12
@@ -84,32 +93,11 @@ Boolean to trigger installation of packages.
 - *Default*: true
 
 
-package_adminfile
------------------
-Solaris specific: string with adminfile.
-
-- *Default*: undef
-
-
 packages
 ============
 Array with package names to be installed.
 
-- *Default*: 'USE_DEFAULTS', based on OS platform
-
-
-package_provider
-----------------
-Solaris specific: string with package provider.
-
-- *Default*: undef
-
-
-package_source
---------------
-Solaris specific: string with package source.
-
-- *Default*: undef
+- *Default*: []
 
 
 rndrelease_version
@@ -117,14 +105,14 @@ rndrelease_version
 String containing the content for /etc/rndrelease.
 If set to undef /etc/rndrelease will be deleted.
 
-- *Default*: 'USE_DEFAULTS', based on OS platform
+- *Default*: undef
 
 
 symlink_target
 ==============
 Absolute path to the target of the libtcl symlink.
 
-- *Default*: 'USE_DEFAULTS', based on OS platform
+- *Default*: undef
 
 
 manage_arc_console_icon
