@@ -1,0 +1,9 @@
+---
+# Ubuntu 22204 defaults in alphabetical order per class
+arc::packages:
+  - 'libc6-i386'
+  - 'libx11-6'
+  - 'perl-tk'
+  - 'tcsh'
+  - 'tcl-dev'
+  - 'xterm'

@@ -3,3 +3,5 @@
 arc::packages:
   - 'tcsh'
   - 'libX11.i686'
+  - 'perl-Tk'
+  - 'xterm'
