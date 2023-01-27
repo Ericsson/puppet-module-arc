@@ -12,11 +12,11 @@ describe 'arc' do
       rndrelease_version = nil
       symlink_target = '/usr/lib/libtcl8.5.so'
     when 'centos-7-x86_64', 'redhat-7-x86_64'
-      packages = [ 'tcsh', 'libX11.i686' ]
+      packages = [ 'tcsh', 'libX11.i686', 'perl-Tk', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
-    when 'centos-8-x86_64', 'redhat-8-x86_64'
-      packages = [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686' ]
+    when 'centos-8-x86_64', 'redhat-8-x86_64', 'centos-9-x86_64', 'redhat-9-x86_64'
+      packages = [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686', 'perl-Tk', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
     when 'sles-10-x86_64'
@@ -28,11 +28,19 @@ describe 'arc' do
       rndrelease_version = 'LMWP 3.3'
       symlink_target = '/usr/lib/libtcl8.5.so'
     when 'sles-12-x86_64', 'sles-15-x86_64'
-      packages = [ 'tcl-32bit', 'tcsh', 'libXmu6-32bit' ]
+      packages = [ 'libXmu6-32bit', 'perl-Tk', 'tcl-32bit', 'tcsh', 'xterm' ]
       rndrelease_version = nil
       symlink_target = '/usr/lib/libtcl8.6.so'
-    when 'ubuntu-12.04-x86_64', 'ubuntu-14.04-x86_64', 'ubuntu-16.04-x86_64', 'ubuntu-18.04-x86_64', 'ubuntu-20.04-x86_64'
+    when 'ubuntu-12.04-x86_64', 'ubuntu-14.04-x86_64', 'ubuntu-16.04-x86_64'
       packages = [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ]
+      rndrelease_version = nil
+      symlink_target = nil
+    when 'ubuntu-18.04-x86_64', 'ubuntu-20.04-x86_64'
+      packages = [ 'libc6:i386', 'libx11-6:i386', 'perl-tk', 'tcl-dev', 'tcsh', 'xterm' ]
+      rndrelease_version = nil
+      symlink_target = nil
+    when 'ubuntu-22.04-x86_64'
+      packages = [ 'libc6-i386', 'libx11-6', 'perl-tk', 'tcl-dev', 'tcsh', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
     end

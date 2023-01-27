@@ -1,5 +1,5 @@
 ---
-# RedHat/CentOS 8 defaults in alphabetical order per class
+# RedHat/CentOS 9 defaults in alphabetical order per class
 arc::packages:
   - 'tcsh'
   - 'libX11.i686'
