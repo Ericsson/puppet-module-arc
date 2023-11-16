@@ -32,15 +32,15 @@
 #   Boolean to trigger creation (true) or deletion (false) of arc_console.desktop for the the arc_console.
 #
 class arc (
-  Boolean $manage_rndrelease = true,
-  Boolean $create_rndrelease = true,
-  Boolean $create_symlink = true,
-  Boolean $install_package = true,
-  Array $packages = [],
-  Optional[String[1]] $rndrelease_version = undef,
-  Optional[Stdlib::Absolutepath] $symlink_target = undef,
-  Boolean $manage_arc_console_icon = false,
-  Boolean $arc_console_icon = false,
+  Boolean                        $manage_rndrelease       = true,
+  Boolean                        $create_rndrelease       = true,
+  Boolean                        $create_symlink          = true,
+  Boolean                        $install_package         = true,
+  Array                          $packages                = [],
+  Optional[String[1]]            $rndrelease_version      = undef,
+  Optional[Stdlib::Absolutepath] $symlink_target          = undef,
+  Boolean                        $manage_arc_console_icon = false,
+  Boolean                        $arc_console_icon        = false,
 ) {
   if $create_rndrelease == false or $rndrelease_version == undef {
     $rndrelease_ensure = 'absent'
