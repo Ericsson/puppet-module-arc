@@ -108,7 +108,7 @@ describe 'arc' do
       end
 
       packages.each do |package|
-        it { is_expected.to contain_package(package).with_ensure('present') }
+        it { is_expected.to contain_package(package).with_ensure('installed') }
       end
     end
   end
