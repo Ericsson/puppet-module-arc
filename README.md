@@ -13,6 +13,10 @@ See metadata.json for compatibility information.
 Other operating systems might be supported by specifying (!) parameters which defaults to undef or [].
 
 # Version history #
+
+Future releases will be documented in CHANGELOG.md.
+
+Change log for older versions below:
 * 2.0.0 2022-08-09
   * Update PDK to 2.5.0
   * Move OS specifc data into hiera
