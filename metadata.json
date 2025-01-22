@@ -1,12 +1,12 @@
 {
-  "name": "kodguru-arc",
+  "name": "ericsson-arc",
   "version": "2.2.0",
-  "author": "kodguru",
+  "author": "ericsson",
   "summary": "Manages libtcl symlink and /etc/rndrelease for AFS usage",
   "license": "Apache-2.0",
-  "source": "git@github.com:kodguru/puppet-module-arc.git",
-  "project_page": "https://github.com/kodguru/puppet-module-arc",
-  "issues_url": "https://github.com/kodguru/puppet-module-arc/issues",
+  "source": "git@github.com:ericsson/puppet-module-arc.git",
+  "project_page": "https://github.com/ericsson/puppet-module-arc",
+  "issues_url": "https://github.com/ericsson/puppet-module-arc/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
