@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.2.1](https://github.com/Ericsson/puppet-module-arc/tree/v2.2.1) (2025-01-24)
+
+[Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v2.2.0...v2.2.1)
+
+**Merged pull requests:**
+
+- Update to PDK v3.0.1 [\#48](https://github.com/Ericsson/puppet-module-arc/pull/48) ([anders-larsson](https://github.com/anders-larsson))
+- Repository transferred to Ericsson org [\#47](https://github.com/Ericsson/puppet-module-arc/pull/47) ([anders-larsson](https://github.com/anders-larsson))
+
 ## [v2.2.0](https://github.com/Ericsson/puppet-module-arc/tree/v2.2.0) (2023-11-16)
 
 [Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v2.1.0...v2.2.0)
