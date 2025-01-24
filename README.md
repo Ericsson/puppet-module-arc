@@ -6,22 +6,17 @@ Puppet Module to manage tcl-devel package, libtcl symlink and /etc/rndrelease.
 This module requires that you have OpenAFS installed. It is intended to be used in cooperation with
  puppet-module-afs. It is needed for modulecmd to work properly on all platforms.
 
-# Compatability #
+# Compatibility #
 
-This module has been tested to work on the following systems with Puppet
-version 7 with the Ruby version associated with those releases.
-This module aims to support the current and previous major Puppet versions.
+See metadata.json for compatibility information.
 
-This module provides OS default values for these OSfamilies:
-
- * RedHat/CentOS 6/7/8
- * Suse 11/12/15
- * Ubuntu 14.04/16.04/18.04/20.04
-
-For other OSfamilies support, please specify all (!) parameters which defaults to undef or [].
-
+Other operating systems might be supported by specifying (!) parameters which defaults to undef or [].
 
 # Version history #
+
+Future releases will be documented in CHANGELOG.md.
+
+Change log for older versions below:
 * 2.0.0 2022-08-09
   * Update PDK to 2.5.0
   * Move OS specifc data into hiera
@@ -59,79 +54,3 @@ For other OSfamilies support, please specify all (!) parameters which defaults t
   * deprecate type() as preparation for Puppet v4
   * Requires stdlib >= 4.2 now
 * 1.0.0 2014-11-13 Initial release
-
-
-# Parameters #
-
-create_rndrelease
-=================
-Boolean to trigger creation of /etc/rndrelease file.
-If set to false /etc/rndrelease will be deleted.
-
-- *Default*: true
-
-
-manage_rndrelease
-=================
-Boolean to trigger management of /etc/rndrelease file.
-If set to false /etc/rndrelease will not be managed.
-
-- *Default*: true
-
-
-create_symlink
-==============
-Boolean to trigger creation of libtcl symlink.
-
-- *Default*: true
-
-
-install_package
-===============
-Boolean to trigger installation of packages.
-
-- *Default*: true
-
-
-packages
-============
-Array with package names to be installed.
-
-- *Default*: []
-
-
-rndrelease_version
-==================
-String containing the content for /etc/rndrelease.
-If set to undef /etc/rndrelease will be deleted.
-
-- *Default*: undef
-
-
-symlink_target
-==============
-Absolute path to the target of the libtcl symlink.
-
-- *Default*: undef
-
-
-manage_arc_console_icon
-==============
-Boolean to trigger if arc_console.desktop should be managed.
-
-- *Default*: false
-
-
-arc_console_icon
-==============
-Boolean to trigger creation (true) or deletion (false) of arc_console.desktop for the the arc_console.
-
-- *Default*: false
-
-
-Hiera example:
-<pre>
-arc::create_rndrelease: true
-arc::create_symlink:    true
-arc::install_package:   true
-</pre>
