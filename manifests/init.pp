@@ -83,7 +83,7 @@ class arc (
   }
 
   if $install_package == true {
-    ensure_packages($packages)
+    stdlib::ensure_packages($packages)
   }
 
   if $manage_arc_console_icon == true {
