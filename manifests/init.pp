@@ -59,7 +59,7 @@ class arc (
 
   if $facts['os']['name'] == 'Ubuntu' {
     # In 20.xx and later /bin is a symlink to usr/bin
-    if $facts['os']['release']['full'] =~ /^(10|12|14|16|18)/ {
+    if $facts['os']['release']['full'] =~ /^(18)/ {
       file { 'awk_symlink':
         ensure => link,
         path   => '/bin/awk',

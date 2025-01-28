@@ -3,14 +3,6 @@ describe 'arc' do
   on_supported_os.sort.each do |os, os_facts|
     # OS specific module defaults
     case os
-    when 'centos-5-x86_64', 'redhat-5-x86_64'
-      packages = [ 'libXmu.i386', 'tcl-devel.i386', 'tcsh' ]
-      rndrelease_version = nil
-      symlink_target = '/usr/lib/libtcl8.4.so'
-    when 'centos-6-x86_64', 'redhat-6-x86_64'
-      packages = [ 'libXmu.i686', 'tcl-devel.i686', 'tcsh' ]
-      rndrelease_version = nil
-      symlink_target = '/usr/lib/libtcl8.5.so'
     when 'centos-7-x86_64', 'redhat-7-x86_64'
       packages = [ 'tcsh', 'libX11.i686', 'perl-Tk', 'xterm' ]
       rndrelease_version = nil
@@ -19,22 +11,10 @@ describe 'arc' do
       packages = [ 'tcsh', 'libX11.i686', 'libxcrypt.i686', 'libnsl.i686', 'perl-Tk', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
-    when 'sles-10-x86_64'
-      packages = [ 'tcl-32bit', 'tcsh' ]
-      rndrelease_version = 'LMWP 2.0'
-      symlink_target = '/usr/lib/libtcl8.4.so'
-    when 'sles-11-x86_64'
-      packages = [ 'tcl-32bit', 'tcsh', 'xorg-x11-libXmu-32bit' ]
-      rndrelease_version = 'LMWP 3.3'
-      symlink_target = '/usr/lib/libtcl8.5.so'
     when 'sles-12-x86_64', 'sles-15-x86_64'
       packages = [ 'libXmu6-32bit', 'perl-Tk', 'tcl-32bit', 'tcsh', 'xterm' ]
       rndrelease_version = nil
       symlink_target = '/usr/lib/libtcl8.6.so'
-    when 'ubuntu-12.04-x86_64', 'ubuntu-14.04-x86_64', 'ubuntu-16.04-x86_64'
-      packages = [ 'libx11-6:i386', 'libc6:i386', 'tcsh', 'tcl-dev' ]
-      rndrelease_version = nil
-      symlink_target = nil
     when 'ubuntu-18.04-x86_64', 'ubuntu-20.04-x86_64'
       packages = [ 'libc6:i386', 'libx11-6:i386', 'perl-tk', 'tcl-dev', 'tcsh', 'xterm' ]
       rndrelease_version = nil
@@ -81,7 +61,7 @@ describe 'arc' do
 
       # Ubuntu specific special specialities
       if os_facts[:os]['name'] == 'Ubuntu'
-        if os_facts[:os]['release']['full'].match?(%r{^(10|12|14|16|18)})
+        if os_facts[:os]['release']['full'].match?(%r{^(18)})
           it do
             is_expected.to contain_file('awk_symlink').only_with(
               {
