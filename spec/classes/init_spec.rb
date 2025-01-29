@@ -30,9 +30,7 @@ describe 'arc' do
 
       it { is_expected.to compile.with_all_deps }
 
-      if rndrelease_version.nil?
-        it { is_expected.to contain_file('arc_rndrelease').with_ensure('absent') }
-      else
+      if rndrelease_version
         it do
           is_expected.to contain_file('arc_rndrelease').only_with(
             {
@@ -43,11 +41,11 @@ describe 'arc' do
             },
           )
         end
+      else
+        it { is_expected.to contain_file('arc_rndrelease').with_ensure('absent') }
       end
 
-      if symlink_target.nil?
-        it { is_expected.not_to contain_file('arc_symlink') }
-      else
+      if symlink_target
         it do
           is_expected.to contain_file('arc_symlink').only_with(
             {
@@ -57,6 +55,8 @@ describe 'arc' do
             },
           )
         end
+      else
+        it { is_expected.not_to contain_file('arc_symlink') }
       end
 
       # Ubuntu specific special specialities

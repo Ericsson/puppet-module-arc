@@ -42,13 +42,13 @@ class arc (
   Boolean                        $manage_arc_console_icon = false,
   Boolean                        $arc_console_icon        = false,
 ) {
-  if $create_rndrelease == false or $rndrelease_version == undef {
+  if !$create_rndrelease or !$rndrelease_version {
     $rndrelease_ensure = 'absent'
   } else {
     $rndrelease_ensure = 'present'
   }
 
-  if $manage_rndrelease == true {
+  if $manage_rndrelease {
     file { 'arc_rndrelease':
       ensure  => $rndrelease_ensure,
       path    => '/etc/rndrelease',
@@ -74,7 +74,7 @@ class arc (
     }
   }
 
-  if $create_symlink == true and $symlink_target != undef {
+  if $create_symlink and $symlink_target {
     file { 'arc_symlink':
       ensure => link,
       path   => '/usr/lib/libtcl.so.0',
@@ -82,12 +82,12 @@ class arc (
     }
   }
 
-  if $install_package == true {
+  if $install_package {
     stdlib::ensure_packages($packages)
   }
 
-  if $manage_arc_console_icon == true {
-    if $arc_console_icon == true {
+  if $manage_arc_console_icon {
+    if $arc_console_icon {
       file { 'arc_console.desktop':
         ensure => file,
         path   => '/usr/share/applications/arc_console.desktop',
