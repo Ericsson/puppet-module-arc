@@ -1,8 +1,0 @@
----
-# deprecated OS flavour, use at your own risk !!
-# SLES/SLED 10.4 i386 defaults in alphabetical order per class
-arc::packages:
-  - 'tcl'
-  - 'tcsh'
-arc::rndrelease_version: 'LMWP 2.4'
-arc::symlink_target: '/usr/lib/libtcl8.4.so'

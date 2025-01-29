@@ -1,8 +1,0 @@
----
-# SLES/SLED 11.1 x86_64 defaults in alphabetical order per class
-arc::packages:
-  - 'tcl-32bit'
-  - 'tcsh'
-  - 'xorg-x11-libXmu-32bit'
-arc::rndrelease_version: 'LMWP 3.1'
-arc::symlink_target: '/usr/lib/libtcl8.5.so'

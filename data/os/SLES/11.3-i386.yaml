@@ -1,9 +1,0 @@
----
-# deprecated OS flavour, use at your own risk !!
-# SLES/SLED 11.3 i386 defaults in alphabetical order per class
-arc::packages:
-  - 'tcl'
-  - 'tcsh'
-  - 'xorg-x11-libXmu'
-arc::rndrelease_version: 'LMWP 3.3'
-arc::symlink_target: '/usr/lib/libtcl8.5.so'
