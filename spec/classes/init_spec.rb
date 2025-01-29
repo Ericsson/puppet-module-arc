@@ -19,7 +19,7 @@ describe 'arc' do
       packages = [ 'libc6:i386', 'libx11-6:i386', 'perl-tk', 'tcl-dev', 'tcsh', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
-    when 'ubuntu-22.04-x86_64'
+    when 'ubuntu-22.04-x86_64', 'ubuntu-24.04-x86_64'
       packages = [ 'libc6-i386', 'libx11-6', 'perl-tk', 'tcl-dev', 'tcsh', 'xterm' ]
       rndrelease_version = nil
       symlink_target = nil
