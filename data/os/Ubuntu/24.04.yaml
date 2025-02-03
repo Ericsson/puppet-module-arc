@@ -1,5 +1,5 @@
 ---
-# Ubuntu 22.04 defaults in alphabetical order per class
+# Ubuntu 24.04 defaults in alphabetical order per class
 arc::packages:
   - 'libc6-i386'
   - 'libx11-6'

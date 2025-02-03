@@ -1,7 +1,0 @@
----
-# Ubuntu 14.04 defaults in alphabetical order per class
-arc::packages:
-  - 'tcsh'
-  - 'libx11-6:i386'
-  - 'libc6:i386'
-  - 'tcl-dev'
