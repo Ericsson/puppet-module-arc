@@ -1,5 +1,15 @@
 # Changelog
 
+## [v3.0.0](https://github.com/Ericsson/puppet-module-arc/tree/v3.0.0) (2025-02-03)
+
+[Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v2.2.1...v3.0.0)
+
+**Merged pull requests:**
+
+- Add support for Ubuntu 2404 and update pdk 3.3.0 [\#52](https://github.com/Ericsson/puppet-module-arc/pull/52) ([dsundq](https://github.com/dsundq))
+- Update README, generate CHANGELOG and REFERENCE [\#50](https://github.com/Ericsson/puppet-module-arc/pull/50) ([anders-larsson](https://github.com/anders-larsson))
+- Update functions for stdlib 9.x [\#49](https://github.com/Ericsson/puppet-module-arc/pull/49) ([anders-larsson](https://github.com/anders-larsson))
+
 ## [v2.2.1](https://github.com/Ericsson/puppet-module-arc/tree/v2.2.1) (2025-01-24)
 
 [Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v2.2.0...v2.2.1)
