@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.1.0](https://github.com/Ericsson/puppet-module-arc/tree/v3.1.0) (2026-03-25)
+
+[Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v3.0.0...v3.1.0)
+
+**Merged pull requests:**
+
+- Adding support for RHEL 10 [\#54](https://github.com/Ericsson/puppet-module-arc/pull/54) ([anjusp2](https://github.com/anjusp2))
+
 ## [v3.0.0](https://github.com/Ericsson/puppet-module-arc/tree/v3.0.0) (2025-02-03)
 
 [Full Changelog](https://github.com/Ericsson/puppet-module-arc/compare/v2.2.1...v3.0.0)

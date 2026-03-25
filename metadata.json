@@ -1,6 +1,6 @@
 {
   "name": "ericsson-arc",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "ericsson",
   "summary": "Manages libtcl symlink and /etc/rndrelease for AFS usage",
   "license": "Apache-2.0",
@@ -58,7 +58,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 6.0.0 < 9.0.0"
+      "version_requirement": ">= 7.0.0 < 9.0.0"
     }
   ],
   "pdk-version": "3.3.0",
