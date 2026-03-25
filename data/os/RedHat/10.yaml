@@ -1,0 +1,9 @@
+---
+# RedHat/CentOS 10 defaults in alphabetical order per class
+arc::packages:
+  - 'tcsh'
+  - 'libX11'
+  - 'libxcrypt'
+  - 'libnsl'
+  - 'perl-Tk'
+  - 'xterm'
